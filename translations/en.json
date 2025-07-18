@@ -7,7 +7,7 @@
     "sell": "Sell Device",
     "cart": "Cart",
     "login": "Login",
-    "register": "Register",
+    "register": "Sign Up",
     "dashboard": "Dashboard",
     "admin": "Admin",
     "logout": "Logout"
@@ -15,6 +15,10 @@
   "home": {
     "welcome": "Welcome to istore.deals",
     "subtitle": "Your trusted electronics store",
+    "hero_title": "Premium Electronics Store",
+    "hero_subtitle": "New & Used Devices, Professional Repairs, Trade-ins",
+    "shop_now": "Shop Now",
+    "request_repair": "Request Repair",
     "featured_categories": "Featured Categories",
     "top_deals": "Top Deals",
     "repair_banner": "Need Repair?",

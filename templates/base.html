@@ -1,67 +1,237 @@
 <!DOCTYPE html>
-<html lang="{{ current_lang }}" dir="{{ 'rtl' if current_lang == 'ar' else 'ltr' }}" data-bs-theme="light">
+<html lang="{{ current_lang }}" dir="{{ 'rtl' if current_lang == 'ar' else 'ltr' }}" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{{ get_text('site_title') }} - {% if current_lang == 'ar' %}متجر الإلكترونيات الموثوق{% else %}Your Smart Tech Destination{% endif %}{% endblock %}</title>
     
-    <!-- Bootstrap CSS with Dark Mode Support -->
-    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    {% if current_lang == 'ar' %}
-    <!-- Arabic Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    {% endif %}
-    <!-- Custom CSS -->
-    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <meta name="description" content="{{ get_text('site_title') }} - Premium electronics store for new & used devices, repairs, and trade-ins. Your smart tech destination.">
     <meta name="keywords" content="electronics, smartphones, laptops, tablets, accessories, repair, trade-in, istore.deals">
+    
+    <style>
+        /* Custom Tailwind Configuration */
+        .font-inter { font-family: 'Inter', sans-serif; }
+        .font-tajawal { font-family: 'Tajawal', sans-serif; }
+        
+        /* Language-specific font setup */
+        html[lang="en"] body { font-family: 'Inter', sans-serif; }
+        html[lang="ar"] body { font-family: 'Tajawal', sans-serif; }
+        
+        /* Gradient backgrounds */
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .bg-gradient-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .bg-gradient-tech {
+            background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+        }
+        
+        /* Smooth animations */
+        .transition-all-300 {
+            transition: all 0.3s ease;
+        }
+        
+        /* Glass effect */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .glass-effect {
+                background: rgba(0, 0, 0, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+        }
+    </style>
+    
+    <script>
+        // Tailwind config
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'tajawal': ['Tajawal', 'sans-serif']
+                    },
+                    colors: {
+                        'primary': '#4f46e5',
+                        'secondary': '#06b6d4',
+                        'accent': '#f59e0b'
+                    }
+                }
+            }
+        }
+        
+        // Language switcher function
+        function switchLanguage(lang) {
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+                document.body.className = document.body.className.replace('font-inter', 'font-tajawal');
+            } else {
+                document.documentElement.dir = 'ltr';
+                document.body.className = document.body.className.replace('font-tajawal', 'font-inter');
+            }
+            
+            // Navigate to language switch route
+            window.location.href = `/set_language/${lang}`;
+        }
+        
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentLang = document.documentElement.lang;
+            if (currentLang === 'ar') {
+                document.body.className += ' font-tajawal';
+            } else {
+                document.body.className += ' font-inter';
+            }
+        });
+    </script>
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold fs-3" href="{{ url_for('index') }}">
-                <i class="fas fa-store text-primary me-2"></i>{{ get_text('site_title') }}
-            </a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link fw-medium" href="{{ url_for('index') }}">{{ get_text('nav.home') }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fw-medium" href="{{ url_for('products') }}">{{ get_text('nav.products') }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fw-medium" href="{{ url_for('repair_service') }}">{{ get_text('nav.repair') }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fw-medium" href="{{ url_for('sell_device') }}">{{ get_text('nav.sell') }}</a>
-                    </li>
-                </ul>
-                
-                <ul class="navbar-nav align-items-center">
-                    <!-- Language Toggle -->
-                    <li class="nav-item me-3">
-                        <div class="dropdown">
-                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-globe me-1"></i>{{ get_text('common.language') }}
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                                <li><a class="dropdown-item" href="{{ url_for('set_language_route', lang='en') }}">{{ get_text('common.english') }}</a></li>
-                                <li><a class="dropdown-item" href="{{ url_for('set_language_route', lang='ar') }}">{{ get_text('common.arabic') }}</a></li>
-                            </ul>
+<body class="bg-gray-50 text-gray-900 antialiased">
+    <!-- Modern Navigation Header -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50 transition-all-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="{{ url_for('index') }}" class="flex items-center space-x-2 rtl:space-x-reverse">
+                        <div class="bg-gradient-tech rounded-lg p-2">
+                            <i class="fas fa-store text-white text-xl"></i>
                         </div>
-                    </li>
+                        <span class="text-2xl font-bold text-gray-900">{{ get_text('site_title') }}</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
+                    <a href="{{ url_for('index') }}" class="text-gray-700 hover:text-primary transition-colors font-medium">
+                        {{ get_text('nav.home') }}
+                    </a>
+                    <a href="{{ url_for('products') }}" class="text-gray-700 hover:text-primary transition-colors font-medium">
+                        {{ get_text('nav.products') }}
+                    </a>
+                    <a href="{{ url_for('repair_service') }}" class="text-gray-700 hover:text-primary transition-colors font-medium">
+                        {{ get_text('nav.repair') }}
+                    </a>
+                    <a href="{{ url_for('sell_device') }}" class="text-gray-700 hover:text-primary transition-colors font-medium">
+                        {{ get_text('nav.sell') }}
+                    </a>
+                </div>
+
+                <!-- Right Side Actions -->
+                <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                    <!-- Language Switcher -->
+                    <div class="relative">
+                        <button id="languageToggle" class="flex items-center space-x-2 rtl:space-x-reverse px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                            <i class="fas fa-globe text-gray-600"></i>
+                            <span class="text-sm font-medium text-gray-700">
+                                {% if current_lang == 'ar' %}ع{% else %}EN{% endif %}
+                            </span>
+                        </button>
+                        <div id="languageDropdown" class="absolute right-0 rtl:right-auto rtl:left-0 mt-2 w-32 bg-white rounded-lg shadow-lg border hidden">
+                            <a href="javascript:void(0)" onclick="switchLanguage('en')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-t-lg">
+                                English
+                            </a>
+                            <a href="javascript:void(0)" onclick="switchLanguage('ar')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-b-lg">
+                                العربية
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Cart Icon -->
+                    {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('cart') }}" class="relative p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                            <i class="fas fa-shopping-cart text-gray-600"></i>
+                            <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                        </a>
+                    {% endif %}
+
+                    <!-- Auth Buttons -->
+                    <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                        {% if current_user.is_authenticated %}
+                            <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                                {% if current_user.is_admin %}
+                                    <a href="{{ url_for('admin_dashboard') }}" class="text-sm text-gray-700 hover:text-primary transition-colors">
+                                        <i class="fas fa-cog mr-1"></i>{{ get_text('nav.admin') }}
+                                    </a>
+                                {% endif %}
+                                <a href="{{ url_for('logout') }}" class="text-sm text-gray-700 hover:text-primary transition-colors">
+                                    {{ get_text('nav.logout') }}
+                                </a>
+                            </div>
+                        {% else %}
+                            <a href="{{ url_for('login') }}" class="text-sm text-gray-700 hover:text-primary transition-colors font-medium">
+                                {{ get_text('nav.login') }}
+                            </a>
+                            <a href="{{ url_for('register') }}" class="bg-gradient-tech text-white px-4 py-2 rounded-lg hover:opacity-90 transition-opacity text-sm font-medium">
+                                {{ get_text('nav.register') }}
+                            </a>
+                        {% endif %}
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-3 space-y-2">
+                <a href="{{ url_for('index') }}" class="block py-2 text-gray-700 hover:text-primary transition-colors">
+                    {{ get_text('nav.home') }}
+                </a>
+                <a href="{{ url_for('products') }}" class="block py-2 text-gray-700 hover:text-primary transition-colors">
+                    {{ get_text('nav.products') }}
+                </a>
+                <a href="{{ url_for('repair_service') }}" class="block py-2 text-gray-700 hover:text-primary transition-colors">
+                    {{ get_text('nav.repair') }}
+                </a>
+                <a href="{{ url_for('sell_device') }}" class="block py-2 text-gray-700 hover:text-primary transition-colors">
+                    {{ get_text('nav.sell') }}
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuButton').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Language dropdown toggle
+        document.getElementById('languageToggle').addEventListener('click', function() {
+            const dropdown = document.getElementById('languageDropdown');
+            dropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            const languageToggle = document.getElementById('languageToggle');
+            const languageDropdown = document.getElementById('languageDropdown');
+            
+            if (!languageToggle.contains(event.target)) {
+                languageDropdown.classList.add('hidden');
+            }
+        });
+    </script>
                     <!-- Dark Mode Toggle -->
                     <li class="nav-item me-3">
                         <button class="btn btn-outline-secondary btn-sm" id="darkModeToggle" aria-label="Toggle dark mode">
