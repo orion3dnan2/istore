@@ -2,7 +2,22 @@
 
 ## Overview
 
-This is a Flask-based e-commerce application for an electronics store. The application provides a complete online shopping experience with user authentication, product catalog management, shopping cart functionality, and administrative features. It supports bilingual content (English and Arabic) and includes a responsive web interface built with Bootstrap.
+This is a professional bilingual (English + Arabic) e-commerce web application called **istore.deals** for an electronics store that sells, buys, displays, and repairs electronic devices. The application is built with Flask and includes complete functionality for product catalog management, user authentication, shopping cart, repair services, device selling, and administrative features.
+
+**Migration Status**: Currently migrating from Replit Agent to Replit environment with enhanced database schema and bilingual support.
+
+## Recent Changes
+
+**July 18, 2025**
+- ✓ Migrated database schema to include proper bilingual support (name_en/name_ar fields)
+- ✓ Added new models: RepairRequest, SellRequest, StoreSetting
+- ✓ Created bilingual translation system with JSON files (English/Arabic)
+- ✓ Implemented RTL support and Arabic fonts in CSS
+- ✓ Enhanced User model with role-based access (admin/customer/merchant)
+- ✓ Added language switching functionality
+- ✓ Created repair service and sell device features
+- ✓ Updated routing system to eliminate conflicts
+- → Working on completing bilingual templates and admin dashboard
 
 ## User Preferences
 

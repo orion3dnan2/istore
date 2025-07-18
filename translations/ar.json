@@ -1,0 +1,72 @@
+{
+  "site_title": "istore.deals",
+  "nav": {
+    "home": "الرئيسية",
+    "products": "المنتجات",
+    "repair": "خدمة الإصلاح",
+    "sell": "بيع الجهاز",
+    "cart": "السلة",
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "dashboard": "لوحة التحكم",
+    "admin": "الإدارة",
+    "logout": "تسجيل الخروج"
+  },
+  "home": {
+    "welcome": "مرحباً بكم في istore.deals",
+    "subtitle": "متجر الإلكترونيات الموثوق",
+    "featured_categories": "الفئات المميزة",
+    "top_deals": "أفضل العروض",
+    "repair_banner": "تحتاج إصلاح؟",
+    "repair_description": "خدمات إصلاح احترافية لجميع الأجهزة الإلكترونية",
+    "sell_banner": "بيع جهازك",
+    "sell_description": "احصل على أفضل سعر لإلكترونياتك المستعملة"
+  },
+  "products": {
+    "title": "المنتجات",
+    "search": "البحث عن المنتجات...",
+    "all_categories": "جميع الفئات",
+    "no_products": "لا توجد منتجات",
+    "add_to_cart": "أضف إلى السلة",
+    "out_of_stock": "نفد المخزون",
+    "condition": "الحالة",
+    "brand": "العلامة التجارية",
+    "price": "السعر"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "name": "الاسم الكامل",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "login_button": "تسجيل الدخول",
+    "register_button": "إنشاء حساب",
+    "forgot_password": "نسيت كلمة المرور؟",
+    "no_account": "ليس لديك حساب؟",
+    "have_account": "لديك حساب بالفعل؟"
+  },
+  "footer": {
+    "contact": "اتصل بنا",
+    "follow_us": "تابعنا",
+    "links": "روابط سريعة",
+    "about": "من نحن",
+    "privacy": "سياسة الخصوصية",
+    "terms": "شروط الخدمة"
+  },
+  "common": {
+    "language": "اللغة",
+    "english": "English",
+    "arabic": "العربية",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "view": "عرض",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "loading": "جاري التحميل...",
+    "success": "نجح!",
+    "error": "حدث خطأ"
+  }
+}

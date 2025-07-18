@@ -1,0 +1,130 @@
+You are helping me build a professional, bilingual (English + Arabic) e-commerce web application called **istore.deals** for an electronics store that sells, buys, displays, and repairs electronic devices.
+
+---
+
+### ☑️ Database: PostgreSQL  
+Create the following tables (use Sequelize if using Node.js, or SQLAlchemy if using Flask):
+
+---
+
+### 1. `categories`  
+| Column        | Type        | Notes                        |
+|---------------|-------------|-------------------------------|
+| id            | UUID / INT  | Primary Key                  |
+| name_en       | String      | English Name                 |
+| name_ar       | String      | Arabic Name                  |
+| slug          | String      | For URL use                  |
+| is_active     | Boolean     | Shown or hidden              |
+| sort_order    | Integer     | Order in lists               |
+
+🔹 Prepopulate with:
+- Smartphones / الهواتف الذكية  
+- Laptops / أجهزة اللابتوب  
+- Tablets / الأجهزة اللوحية  
+- Accessories / الإكسسوارات  
+- Gaming & Consoles / الألعاب وأجهزة اللعب  
+- Audio & Headphones / الصوتيات والسماعات  
+- Smart Home / المنزل الذكي  
+
+---
+
+### 2. `products`  
+| Column         | Type         | Notes                                  |
+|----------------|--------------|-----------------------------------------|
+| id             | UUID / INT   | Primary Key                            |
+| name_en        | String       | Product name in English                |
+| name_ar        | String       | Product name in Arabic                 |
+| description_en | Text         | English description                    |
+| description_ar | Text         | Arabic description                     |
+| category_id    | FK           | FK to categories.id                    |
+| brand          | String       | e.g., Apple, Samsung                   |
+| condition      | Enum         | "new", "used"                          |
+| price          | Decimal      | Final price                            |
+| stock_quantity | Integer      | How many in stock                      |
+| image_url      | String       | Path or link to product image          |
+| created_at     | Timestamp    |                                        |
+
+---
+
+### 3. `users`  
+| Column       | Type         | Notes                              |
+|--------------|--------------|-------------------------------------|
+| id           | UUID / INT   | Primary Key                        |
+| name         | String       | Full name                          |
+| email        | String       | Unique                             |
+| password     | String       | Hashed                             |
+| role         | Enum         | "admin", "customer", "merchant"    |
+| language     | String       | Preferred language ("en" or "ar")  |
+| created_at   | Timestamp    |                                     |
+
+---
+
+### 4. `repair_requests`  
+| Column          | Type        | Notes                             |
+|-----------------|-------------|------------------------------------|
+| id              | UUID / INT  | Primary Key                       |
+| user_id         | FK          | FK to users.id (nullable)         |
+| device_type     | String      | e.g., Laptop, Phone               |
+| brand           | String      |                                   |
+| model           | String      |                                   |
+| issue_description | Text      |                                   |
+| photo_url       | String      | Optional image                    |
+| contact_info    | String      | Email or phone                    |
+| status          | Enum        | pending / in progress / done      |
+| created_at      | Timestamp   |                                   |
+
+---
+
+### 5. `sell_requests` (for used device sales)  
+| Column          | Type        | Notes                             |
+|-----------------|-------------|------------------------------------|
+| id              | UUID / INT  | Primary Key                       |
+| user_id         | FK          | FK to users.id (nullable)         |
+| category_id     | FK          | FK to categories.id               |
+| brand           | String      |                                   |
+| model           | String      |                                   |
+| condition       | Enum        | new / like-new / used             |
+| expected_price  | Decimal     |                                   |
+| photos_url      | String[]    | Array or multiple URLs            |
+| contact_info    | String      | Email / phone                     |
+| created_at      | Timestamp   |                                   |
+
+---
+
+### 6. `store_settings` (for Footer & Branding)
+| Column          | Type        | Notes                                |
+|-----------------|-------------|---------------------------------------|
+| id              | INT         | Always 1 row                         |
+| email           | String      | Contact email                        |
+| phone           | String      | Customer service phone               |
+| whatsapp        | String      | Optional WhatsApp                    |
+| address_en      | String      | Address (English)                    |
+| address_ar      | String      | Address (Arabic)                     |
+| slogan_en       | String      | Short store tagline                  |
+| slogan_ar       | String      |                                      |
+| facebook        | String      | URL                                  |
+| instagram       | String      | URL                                  |
+| twitter         | String      | URL                                  |
+| tiktok          | String      | URL                                  |
+| linkedin        | String      | URL                                  |
+| copyright_en    | String      | e.g., "© 2025 istore.deals"         |
+| copyright_ar    | String      |                                      |
+
+---
+
+### 🔧 Features to Build (Phase 1):
+1. Setup full PostgreSQL schema with seed data.
+2. Create language loader (EN/AR) using JSON files.
+3. Homepage layout:
+   - Header with language switcher
+   - Featured categories from DB
+   - Top Deals section (placeholder)
+   - Repair and Sell device callout banners
+   - Footer dynamic from DB settings
+4. Admin Dashboard with:
+   - Categories manager (CRUD)
+   - Store settings editor (contact & footer)
+   - Products manager (basic version)
+5. Enable dual-language toggle with `document.dir` switch and Arabic font.
+
+Pause after implementing database + homepage + admin dashboard + footer. Wait for review before continuing.

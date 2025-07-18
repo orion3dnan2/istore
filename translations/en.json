@@ -1,0 +1,72 @@
+{
+  "site_title": "istore.deals",
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "repair": "Repair Service",
+    "sell": "Sell Device",
+    "cart": "Cart",
+    "login": "Login",
+    "register": "Register",
+    "dashboard": "Dashboard",
+    "admin": "Admin",
+    "logout": "Logout"
+  },
+  "home": {
+    "welcome": "Welcome to istore.deals",
+    "subtitle": "Your trusted electronics store",
+    "featured_categories": "Featured Categories",
+    "top_deals": "Top Deals",
+    "repair_banner": "Need Repair?",
+    "repair_description": "Professional repair services for all electronic devices",
+    "sell_banner": "Sell Your Device",
+    "sell_description": "Get the best price for your used electronics"
+  },
+  "products": {
+    "title": "Products",
+    "search": "Search products...",
+    "all_categories": "All Categories",
+    "no_products": "No products found",
+    "add_to_cart": "Add to Cart",
+    "out_of_stock": "Out of Stock",
+    "condition": "Condition",
+    "brand": "Brand",
+    "price": "Price"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "name": "Full Name",
+    "email": "Email",
+    "password": "Password",
+    "login_button": "Login",
+    "register_button": "Register",
+    "forgot_password": "Forgot Password?",
+    "no_account": "Don't have an account?",
+    "have_account": "Already have an account?"
+  },
+  "footer": {
+    "contact": "Contact Us",
+    "follow_us": "Follow Us",
+    "links": "Quick Links",
+    "about": "About Us",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "common": {
+    "language": "Language",
+    "english": "English",
+    "arabic": "العربية",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "view": "View",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "loading": "Loading...",
+    "success": "Success!",
+    "error": "Error occurred"
+  }
+}

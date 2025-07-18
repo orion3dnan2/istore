@@ -99,18 +99,18 @@ def login():
         
         if user and user.check_password(password):
             login_user(user)
-            flash(get_text('common.success'), 'success')
+            flash(get_text('auth.login_success'), 'success')
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('index'))
         else:
-            flash('Invalid email or password', 'error')
+            flash('Invalid username or password', 'error')
     
     return render_template('login.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        name = request.form['name']
+        username = request.form['username']
         email = request.form['email']
         password = request.form['password']
         confirm_password = request.form['confirm_password']
@@ -120,17 +120,20 @@ def register():
             flash('Passwords do not match', 'error')
             return render_template('register.html')
         
+        if User.query.filter_by(username=username).first():
+            flash('Username already exists', 'error')
+            return render_template('register.html')
+        
         if User.query.filter_by(email=email).first():
             flash('Email already exists', 'error')
             return render_template('register.html')
         
         # Create new user
         user = User(
-            name=name,
+            username=username,
             email=email,
-            language=get_current_language()
+            password_hash=generate_password_hash(password)
         )
-        user.set_password(password)
         
         db.session.add(user)
         db.session.commit()
@@ -169,7 +172,7 @@ def repair_service():
         db.session.add(repair_request)
         db.session.commit()
         
-        flash('Repair request submitted successfully!', 'success')
+        flash(get_text('repair.request_submitted'), 'success')
         return redirect(url_for('repair_service'))
     
     return render_template('repair_service.html')
@@ -198,7 +201,7 @@ def sell_device():
         db.session.add(sell_request)
         db.session.commit()
         
-        flash('Device submission received! We will evaluate your device and contact you.', 'success')
+        flash(get_text('sell.request_submitted'), 'success')
         return redirect(url_for('sell_device'))
     
     categories = Category.query.filter_by(is_active=True).order_by(Category.sort_order).all()
@@ -220,7 +223,7 @@ def add_to_cart(product_id):
         db.session.add(cart_item)
     
     db.session.commit()
-    flash(f'{get_localized_field(product, "name")} added to cart!', 'success')
+    flash(f'{product.name} added to cart!', 'success')
     return redirect(url_for('product_detail', product_id=product_id))
 
 @app.route('/cart')
@@ -271,72 +274,107 @@ def admin_dashboard():
     total_products = Product.query.count()
     total_categories = Category.query.count()
     total_users = User.query.count()
-    total_repair_requests = RepairRequest.query.count()
-    total_sell_requests = SellRequest.query.count()
     
     recent_products = Product.query.order_by(Product.created_at.desc()).limit(5).all()
-    recent_repair_requests = RepairRequest.query.order_by(RepairRequest.created_at.desc()).limit(5).all()
     
     return render_template('admin/dashboard.html', 
                          total_products=total_products,
                          total_categories=total_categories,
                          total_users=total_users,
-                         total_repair_requests=total_repair_requests,
-                         total_sell_requests=total_sell_requests,
-                         recent_products=recent_products,
-                         recent_repair_requests=recent_repair_requests)
+                         recent_products=recent_products)
+
+@app.route('/admin/products')
+@login_required
+@admin_required
+def admin_products():
+    products = Product.query.all()
+    return render_template('admin/products.html', products=products)
 
 @app.route('/admin/categories')
 @login_required
 @admin_required
 def admin_categories():
-    categories = Category.query.order_by(Category.sort_order).all()
+    categories = Category.query.all()
     return render_template('admin/categories.html', categories=categories)
 
-@app.route('/admin/settings', methods=['GET', 'POST'])
+@app.route('/admin/add_product', methods=['GET', 'POST'])
 @login_required
 @admin_required
-def admin_settings():
-    settings = StoreSetting.query.first()
-    if not settings:
-        settings = StoreSetting()
-        db.session.add(settings)
+def admin_add_product():
+    if request.method == 'POST':
+        name = request.form['name']
+        name_ar = request.form.get('name_ar', '')
+        description = request.form['description']
+        price = float(request.form['price'])
+        stock_quantity = int(request.form['stock_quantity'])
+        category_id = int(request.form['category_id'])
+        image_url = request.form.get('image_url', 'https://via.placeholder.com/300x200?text=No+Image')
+        
+        product = Product(
+            name=name,
+            name_ar=name_ar,
+            description=description,
+            price=price,
+            stock_quantity=stock_quantity,
+            category_id=category_id,
+            image_url=image_url
+        )
+        
+        db.session.add(product)
         db.session.commit()
+        
+        flash('Product added successfully!', 'success')
+        return redirect(url_for('admin_products'))
+    
+    categories = Category.query.all()
+    return render_template('admin/add_product.html', categories=categories)
+
+@app.route('/admin/edit_product/<int:product_id>', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def admin_edit_product(product_id):
+    product = Product.query.get_or_404(product_id)
     
     if request.method == 'POST':
-        settings.email = request.form['email']
-        settings.phone = request.form['phone']
-        settings.whatsapp = request.form.get('whatsapp', '')
-        settings.address_en = request.form['address_en']
-        settings.address_ar = request.form['address_ar']
-        settings.slogan_en = request.form['slogan_en']
-        settings.slogan_ar = request.form['slogan_ar']
-        settings.facebook = request.form.get('facebook', '')
-        settings.instagram = request.form.get('instagram', '')
-        settings.twitter = request.form.get('twitter', '')
-        settings.copyright_en = request.form['copyright_en']
-        settings.copyright_ar = request.form['copyright_ar']
+        product.name = request.form['name']
+        product.name_ar = request.form.get('name_ar', '')
+        product.description = request.form['description']
+        product.price = float(request.form['price'])
+        product.stock_quantity = int(request.form['stock_quantity'])
+        product.category_id = int(request.form['category_id'])
+        product.image_url = request.form.get('image_url', product.image_url)
+        product.is_active = 'is_active' in request.form
         
         db.session.commit()
-        flash('Settings updated successfully!', 'success')
-        return redirect(url_for('admin_settings'))
+        
+        flash('Product updated successfully!', 'success')
+        return redirect(url_for('admin_products'))
     
-    return render_template('admin/settings.html', settings=settings)
+    categories = Category.query.all()
+    return render_template('admin/edit_product.html', product=product, categories=categories)
+
+@app.route('/admin/delete_product/<int:product_id>')
+@login_required
+@admin_required
+def admin_delete_product(product_id):
+    product = Product.query.get_or_404(product_id)
+    db.session.delete(product)
+    db.session.commit()
+    flash('Product deleted successfully!', 'info')
+    return redirect(url_for('admin_products'))
 
 @app.route('/admin/add_category', methods=['POST'])
 @login_required
 @admin_required
 def admin_add_category():
-    name_en = request.form['name_en']
-    name_ar = request.form['name_ar']
-    slug = request.form['slug']
-    sort_order = int(request.form.get('sort_order', 0))
+    name = request.form['name']
+    name_ar = request.form.get('name_ar', '')
+    description = request.form.get('description', '')
     
     category = Category(
-        name_en=name_en,
+        name=name,
         name_ar=name_ar,
-        slug=slug,
-        sort_order=sort_order
+        description=description
     )
     
     db.session.add(category)
@@ -360,6 +398,56 @@ def admin_delete_category(category_id):
         flash('Category deleted successfully!', 'info')
     
     return redirect(url_for('admin_categories'))
+
+# New Service Routes for istore.deals
+@app.route('/repair-service', methods=['GET', 'POST'])
+def repair_service():
+    if request.method == 'POST':
+        # Handle repair service form submission
+        device_type = request.form.get('device_type')
+        brand = request.form.get('brand')
+        model = request.form.get('model')
+        issue_description = request.form.get('issue_description')
+        customer_name = request.form.get('customer_name')
+        customer_email = request.form.get('customer_email')
+        customer_phone = request.form.get('customer_phone')
+        
+        # Here you would typically save to database or send email
+        flash('Repair request submitted successfully! We will contact you within 24 hours.', 'success')
+        return redirect(url_for('repair_service'))
+    
+    return render_template('repair_service.html')
+
+@app.route('/sell-device', methods=['GET', 'POST'])
+def sell_device():
+    if request.method == 'POST':
+        # Handle sell device form submission
+        device_type = request.form.get('device_type')
+        brand = request.form.get('brand')
+        model = request.form.get('model')
+        condition = request.form.get('condition')
+        description = request.form.get('description')
+        customer_name = request.form.get('customer_name')
+        customer_email = request.form.get('customer_email')
+        customer_phone = request.form.get('customer_phone')
+        
+        # Here you would typically calculate price and save to database
+        flash('Device submission received! We will evaluate your device and contact you with a quote.', 'success')
+        return redirect(url_for('sell_device'))
+    
+    return render_template('sell_device.html')
+
+@app.route('/dashboard')
+@login_required
+def user_dashboard():
+    user_orders = []  # You would fetch user's orders from database
+    repair_requests = []  # You would fetch user's repair requests from database
+    sold_devices = []  # You would fetch user's sold devices from database
+    
+    return render_template('user_dashboard.html', 
+                         user_orders=user_orders,
+                         repair_requests=repair_requests,
+                         sold_devices=sold_devices)
 
 # Error handlers
 @app.errorhandler(404)

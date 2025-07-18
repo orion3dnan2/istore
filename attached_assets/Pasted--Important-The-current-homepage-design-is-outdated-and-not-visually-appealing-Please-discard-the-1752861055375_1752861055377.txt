@@ -1,0 +1,64 @@
+⚠️ Important: The current homepage design is outdated and not visually appealing. Please discard the current UI and rebuild the top of the homepage from scratch using premium, modern design.
+
+---
+
+🎯 Goals for the New Header + Hero Section Design for **istore.deals**:
+
+1. ✅ **Language Switcher** (Top-Right):
+   - EN / AR toggle clearly visible at the top
+   - When user switches language:
+     - Load `/i18n/en.json` or `/i18n/ar.json` for UI text
+     - Set `document.dir = "ltr"` or `document.dir = "rtl"`
+     - Change font family globally:
+       - `"Inter"` or `"Roboto"` for English
+       - `"Tajawal"` (Google Font) for Arabic
+
+2. 🎨 **Modern & Premium Look**:
+   - Use Tailwind CSS (preferred) or Bootstrap 5
+   - Clean layout, elegant spacing, and high contrast buttons
+   - Use **Inter** or **Roboto** font for English, and **Tajawal** for Arabic
+   - Apply modern tech-style colors (blues, grays, soft gradients)
+   - Light theme by default, optional dark mode
+
+3. 🧱 **Header Includes**:
+   - Left: `istore.deals` logo placeholder
+   - Middle or right:
+     - Home / Shop / Repair / Sell Device nav (language-aware)
+     - Language switcher (EN / ع or flag icons)
+     - [Login] [Sign Up] buttons
+   - Optional: theme switcher (light/dark mode)
+
+4. 🖼️ **Hero Section**:
+   - Full width section with:
+     - Welcome message (EN + AR)
+     - Short tagline
+     - “Shop Now / تسوق الآن” and “Request Repair / طلب صيانة” buttons
+     - Background: light gradient or elegant image
+   - Fully responsive on mobile
+
+5. ✅ **Typography**:
+   - Import the following fonts:
+     - `Inter` or `Roboto` from Google Fonts for EN
+     - `Tajawal` from Google Fonts for AR
+   - Apply global CSS change when switching language:
+     ```js
+     if (lang === "ar") {
+       document.body.style.fontFamily = "Tajawal";
+       document.dir = "rtl";
+     } else {
+       document.body.style.fontFamily = "Inter";
+       document.dir = "ltr";
+     }
+     ```
+
+6. 📱 Fully responsive and mobile-first
+
+7. 💬 After finishing the new header + language switcher + hero section, pause and wait for review before continuing to categories and shop.
+
+---
+
+✅ Notes:
+- Remove any old or cluttered header
+- Use smooth hover/fade transitions on buttons and nav
+- Stick to 1–2 primary colors (not too flashy)
+- Icons (FontAwesome or Heroicons) are welcome
