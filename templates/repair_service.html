@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+
+{% block title %}Device Repair Service - istore.deals{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-5 fw-bold mb-3">Expert Device Repair</h1>
+                <p class="lead mb-4">Professional repair services for all your electronic devices. Certified technicians, genuine parts, and fast turnaround times.</p>
+                <div class="d-flex gap-4 mb-4">
+                    <div class="text-center">
+                        <div class="h4 fw-bold">24-48hrs</div>
+                        <small>Average Repair Time</small>
+                    </div>
+                    <div class="text-center">
+                        <div class="h4 fw-bold">90 Days</div>
+                        <small>Repair Warranty</small>
+                    </div>
+                    <div class="text-center">
+                        <div class="h4 fw-bold">Free</div>
+                        <small>Diagnosis</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=400&fit=crop&crop=center" 
+                     class="img-fluid rounded-4 shadow-lg" alt="Device Repair">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Repair Request Form -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-header bg-white border-0 p-4">
+                        <h3 class="fw-bold mb-2">Request Repair Service</h3>
+                        <p class="text-muted mb-0">Fill out the form below and we'll get back to you with a free diagnosis and quote.</p>
+                    </div>
+                    <div class="card-body p-4">
+                        <form method="POST">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="device_type" class="form-label fw-medium">Device Type *</label>
+                                    <select class="form-select" id="device_type" name="device_type" required>
+                                        <option value="">Select device type</option>
+                                        <option value="smartphone">Smartphone</option>
+                                        <option value="tablet">Tablet</option>
+                                        <option value="laptop">Laptop</option>
+                                        <option value="smartwatch">Smartwatch</option>
+                                        <option value="headphones">Headphones</option>
+                                        <option value="gaming_console">Gaming Console</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="brand" class="form-label fw-medium">Brand *</label>
+                                    <select class="form-select" id="brand" name="brand" required>
+                                        <option value="">Select brand</option>
+                                        <option value="apple">Apple</option>
+                                        <option value="samsung">Samsung</option>
+                                        <option value="google">Google</option>
+                                        <option value="oneplus">OnePlus</option>
+                                        <option value="dell">Dell</option>
+                                        <option value="hp">HP</option>
+                                        <option value="lenovo">Lenovo</option>
+                                        <option value="sony">Sony</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <label for="model" class="form-label fw-medium">Model *</label>
+                                    <input type="text" class="form-control" id="model" name="model" 
+                                           placeholder="e.g., iPhone 14 Pro, Galaxy S23, MacBook Pro 2023" required>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <label for="issue_description" class="form-label fw-medium">Issue Description *</label>
+                                    <textarea class="form-control" id="issue_description" name="issue_description" rows="4" 
+                                              placeholder="Please describe the problem in detail..." required></textarea>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="customer_name" class="form-label fw-medium">Your Name *</label>
+                                    <input type="text" class="form-control" id="customer_name" name="customer_name" required>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="customer_email" class="form-label fw-medium">Email Address *</label>
+                                    <input type="email" class="form-control" id="customer_email" name="customer_email" required>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <label for="customer_phone" class="form-label fw-medium">Phone Number *</label>
+                                    <input type="tel" class="form-control" id="customer_phone" name="customer_phone" 
+                                           placeholder="+1 (555) 123-4567" required>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="agree_terms" required>
+                                        <label class="form-check-label" for="agree_terms">
+                                            I agree to the <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Privacy Policy</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary btn-lg w-100 fw-semibold">
+                                        <i class="fas fa-paper-plane me-2"></i>Submit Repair Request
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Repair Process -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-6 fw-bold mb-3">Our Repair Process</h2>
+            <p class="lead text-muted">Simple, transparent, and reliable</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="process-step">
+                    <div class="step-number bg-primary text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <span class="fw-bold">1</span>
+                    </div>
+                    <h5 class="fw-semibold mb-2">Submit Request</h5>
+                    <p class="text-muted small">Fill out our repair form with device details and issue description.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="process-step">
+                    <div class="step-number bg-success text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <span class="fw-bold">2</span>
+                    </div>
+                    <h5 class="fw-semibold mb-2">Free Diagnosis</h5>
+                    <p class="text-muted small">Our technicians perform a comprehensive diagnostic assessment.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="process-step">
+                    <div class="step-number bg-info text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <span class="fw-bold">3</span>
+                    </div>
+                    <h5 class="fw-semibold mb-2">Approve Quote</h5>
+                    <p class="text-muted small">Review and approve the repair quote before we proceed.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="process-step">
+                    <div class="step-number bg-warning text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <span class="fw-bold">4</span>
+                    </div>
+                    <h5 class="fw-semibold mb-2">Device Ready</h5>
+                    <p class="text-muted small">Your device is repaired and ready for pickup or delivery.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Common Issues -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-6 fw-bold mb-3">Common Repair Services</h2>
+            <p class="lead text-muted">We fix all types of device issues</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item bg-white p-4 rounded-4 shadow-sm h-100">
+                    <div class="service-icon bg-danger bg-gradient rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <i class="fas fa-mobile-alt text-white"></i>
+                    </div>
+                    <h5 class="fw-semibold mb-3">Screen Repairs</h5>
+                    <ul class="list-unstyled text-muted small">
+                        <li class="mb-1">• Cracked screen replacement</li>
+                        <li class="mb-1">• LCD/OLED display issues</li>
+                        <li class="mb-1">• Touch sensitivity problems</li>
+                        <li class="mb-1">• Dead pixels or lines</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item bg-white p-4 rounded-4 shadow-sm h-100">
+                    <div class="service-icon bg-primary bg-gradient rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <i class="fas fa-battery-half text-white"></i>
+                    </div>
+                    <h5 class="fw-semibold mb-3">Battery Issues</h5>
+                    <ul class="list-unstyled text-muted small">
+                        <li class="mb-1">• Battery replacement</li>
+                        <li class="mb-1">• Charging port repair</li>
+                        <li class="mb-1">• Power button issues</li>
+                        <li class="mb-1">• Battery drain problems</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item bg-white p-4 rounded-4 shadow-sm h-100">
+                    <div class="service-icon bg-success bg-gradient rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <i class="fas fa-microchip text-white"></i>
+                    </div>
+                    <h5 class="fw-semibold mb-3">Hardware Repairs</h5>
+                    <ul class="list-unstyled text-muted small">
+                        <li class="mb-1">• Motherboard issues</li>
+                        <li class="mb-1">• Camera problems</li>
+                        <li class="mb-1">• Speaker/microphone issues</li>
+                        <li class="mb-1">• Water damage recovery</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

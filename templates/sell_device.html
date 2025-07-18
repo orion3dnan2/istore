@@ -1,0 +1,327 @@
+{% extends "base.html" %}
+
+{% block title %}Sell Your Device - istore.deals{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="py-5 bg-success text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-5 fw-bold mb-3">Sell Your Device</h1>
+                <p class="lead mb-4">Get instant quotes for your electronics. Fast, secure, and hassle-free selling process with competitive prices.</p>
+                <div class="d-flex gap-4 mb-4">
+                    <div class="text-center">
+                        <div class="h4 fw-bold">Instant</div>
+                        <small>Price Quote</small>
+                    </div>
+                    <div class="text-center">
+                        <div class="h4 fw-bold">Free</div>
+                        <small>Shipping Kit</small>
+                    </div>
+                    <div class="text-center">
+                        <div class="h4 fw-bold">24hrs</div>
+                        <small>Payment</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&h=400&fit=crop&crop=center" 
+                     class="img-fluid rounded-4 shadow-lg" alt="Sell Device">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sell Device Form -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-header bg-white border-0 p-4">
+                        <h3 class="fw-bold mb-2">Get Your Device Quote</h3>
+                        <p class="text-muted mb-0">Tell us about your device and get an instant quote. We accept all conditions!</p>
+                    </div>
+                    <div class="card-body p-4">
+                        <form method="POST">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="device_type" class="form-label fw-medium">Device Type *</label>
+                                    <select class="form-select" id="device_type" name="device_type" required>
+                                        <option value="">Select device type</option>
+                                        <option value="smartphone">Smartphone</option>
+                                        <option value="tablet">Tablet</option>
+                                        <option value="laptop">Laptop</option>
+                                        <option value="smartwatch">Smartwatch</option>
+                                        <option value="headphones">Headphones</option>
+                                        <option value="gaming_console">Gaming Console</option>
+                                        <option value="other">Other Electronics</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="brand" class="form-label fw-medium">Brand *</label>
+                                    <select class="form-select" id="brand" name="brand" required>
+                                        <option value="">Select brand</option>
+                                        <option value="apple">Apple</option>
+                                        <option value="samsung">Samsung</option>
+                                        <option value="google">Google</option>
+                                        <option value="oneplus">OnePlus</option>
+                                        <option value="dell">Dell</option>
+                                        <option value="hp">HP</option>
+                                        <option value="lenovo">Lenovo</option>
+                                        <option value="sony">Sony</option>
+                                        <option value="nintendo">Nintendo</option>
+                                        <option value="microsoft">Microsoft</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <label for="model" class="form-label fw-medium">Model *</label>
+                                    <input type="text" class="form-control" id="model" name="model" 
+                                           placeholder="e.g., iPhone 14 Pro Max, Galaxy S23 Ultra, MacBook Pro 2023" required>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="condition" class="form-label fw-medium">Condition *</label>
+                                    <select class="form-select" id="condition" name="condition" required>
+                                        <option value="">Select condition</option>
+                                        <option value="excellent">Excellent - Like new, no visible wear</option>
+                                        <option value="good">Good - Minor signs of use</option>
+                                        <option value="fair">Fair - Noticeable wear, fully functional</option>
+                                        <option value="poor">Poor - Significant wear or issues</option>
+                                        <option value="broken">Broken - Not working properly</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="storage" class="form-label fw-medium">Storage/Memory</label>
+                                    <select class="form-select" id="storage" name="storage">
+                                        <option value="">Select storage (if applicable)</option>
+                                        <option value="64gb">64GB</option>
+                                        <option value="128gb">128GB</option>
+                                        <option value="256gb">256GB</option>
+                                        <option value="512gb">512GB</option>
+                                        <option value="1tb">1TB</option>
+                                        <option value="2tb">2TB</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <label for="description" class="form-label fw-medium">Additional Details</label>
+                                    <textarea class="form-control" id="description" name="description" rows="4" 
+                                              placeholder="Any additional information about your device (accessories included, specific issues, etc.)"></textarea>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="customer_name" class="form-label fw-medium">Your Name *</label>
+                                    <input type="text" class="form-control" id="customer_name" name="customer_name" required>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="customer_email" class="form-label fw-medium">Email Address *</label>
+                                    <input type="email" class="form-control" id="customer_email" name="customer_email" required>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <label for="customer_phone" class="form-label fw-medium">Phone Number *</label>
+                                    <input type="tel" class="form-control" id="customer_phone" name="customer_phone" 
+                                           placeholder="+1 (555) 123-4567" required>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle me-2"></i>
+                                        <strong>What happens next?</strong> We'll evaluate your device details and send you a competitive quote within 24 hours. If you accept, we'll send you a free shipping kit to send us your device.
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="agree_terms" required>
+                                        <label class="form-check-label" for="agree_terms">
+                                            I agree to the <a href="#" class="text-success">Terms of Service</a> and <a href="#" class="text-success">Privacy Policy</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-success btn-lg w-100 fw-semibold">
+                                        <i class="fas fa-dollar-sign me-2"></i>Get My Quote
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-6 fw-bold mb-3">How Selling Works</h2>
+            <p class="lead text-muted">Simple, secure, and fast process</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="process-step">
+                    <div class="step-number bg-success text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <span class="fw-bold">1</span>
+                    </div>
+                    <h5 class="fw-semibold mb-2">Get Quote</h5>
+                    <p class="text-muted small">Submit your device details and receive an instant competitive quote.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="process-step">
+                    <div class="step-number bg-primary text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <span class="fw-bold">2</span>
+                    </div>
+                    <h5 class="fw-semibold mb-2">Ship for Free</h5>
+                    <p class="text-muted small">Accept the quote and we'll send you a free, insured shipping kit.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="process-step">
+                    <div class="step-number bg-info text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <span class="fw-bold">3</span>
+                    </div>
+                    <h5 class="fw-semibold mb-2">Device Inspection</h5>
+                    <p class="text-muted small">Our experts thoroughly inspect your device upon arrival.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="process-step">
+                    <div class="step-number bg-warning text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <span class="fw-bold">4</span>
+                    </div>
+                    <h5 class="fw-semibold mb-2">Get Paid</h5>
+                    <p class="text-muted small">Receive payment within 24 hours via your preferred method.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- What We Buy -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-6 fw-bold mb-3">What We Buy</h2>
+            <p class="lead text-muted">We accept devices in all conditions</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="buy-category bg-white p-4 rounded-4 shadow-sm h-100">
+                    <div class="category-icon bg-primary bg-gradient rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <i class="fas fa-mobile-alt text-white"></i>
+                    </div>
+                    <h5 class="fw-semibold mb-3">Smartphones</h5>
+                    <ul class="list-unstyled text-muted small">
+                        <li class="mb-1">• iPhone (all models)</li>
+                        <li class="mb-1">• Samsung Galaxy series</li>
+                        <li class="mb-1">• Google Pixel</li>
+                        <li class="mb-1">• OnePlus, Xiaomi, and more</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="buy-category bg-white p-4 rounded-4 shadow-sm h-100">
+                    <div class="category-icon bg-success bg-gradient rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <i class="fas fa-laptop text-white"></i>
+                    </div>
+                    <h5 class="fw-semibold mb-3">Laptops & Tablets</h5>
+                    <ul class="list-unstyled text-muted small">
+                        <li class="mb-1">• MacBooks (all generations)</li>
+                        <li class="mb-1">• Dell, HP, Lenovo laptops</li>
+                        <li class="mb-1">• iPads and Android tablets</li>
+                        <li class="mb-1">• Surface Pro and tablets</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="buy-category bg-white p-4 rounded-4 shadow-sm h-100">
+                    <div class="category-icon bg-info bg-gradient rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <i class="fas fa-gamepad text-white"></i>
+                    </div>
+                    <h5 class="fw-semibold mb-3">Gaming & More</h5>
+                    <ul class="list-unstyled text-muted small">
+                        <li class="mb-1">• Gaming consoles (PS5, Xbox, Switch)</li>
+                        <li class="mb-1">• Smartwatches (Apple Watch, etc.)</li>
+                        <li class="mb-1">• Headphones and earbuds</li>
+                        <li class="mb-1">• Other electronics</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-6 fw-bold mb-3">Frequently Asked Questions</h2>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="accordion" id="sellFAQ">
+                    <div class="accordion-item border-0 mb-3 rounded-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                How do you determine the price for my device?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#sellFAQ">
+                            <div class="accordion-body">
+                                We use current market values, device condition, age, and demand to provide competitive quotes. Our pricing is transparent and based on real-time market data.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item border-0 mb-3 rounded-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                What if my device has issues or is broken?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#sellFAQ">
+                            <div class="accordion-body">
+                                We buy devices in all conditions! Even broken devices have value for parts and recycling. Just be honest about the condition in your submission.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item border-0 mb-3 rounded-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                How do I get paid?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#sellFAQ">
+                            <div class="accordion-body">
+                                We offer multiple payment options including PayPal, bank transfer, or check. Payment is processed within 24 hours of device inspection completion.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

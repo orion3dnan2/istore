@@ -1,19 +1,102 @@
 {% extends "base.html" %}
 
-{% block title %}Home - Electronics Store{% endblock %}
+{% block title %}Welcome to istore.deals - Your Smart Tech Destination{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
-<section class="hero-section bg-primary text-white py-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <h1 class="display-4 fw-bold">Welcome to Electronics Store</h1>
-                <p class="lead">Discover the latest electronics and gadgets at unbeatable prices. Quality products, fast delivery, and excellent customer service.</p>
-                <a href="{{ url_for('products') }}" class="btn btn-light btn-lg">Shop Now</a>
+<section class="hero-gradient position-relative overflow-hidden">
+    <div class="hero-background"></div>
+    <div class="container position-relative">
+        <div class="row align-items-center min-vh-75">
+            <div class="col-lg-6 order-2 order-lg-1">
+                <div class="hero-content">
+                    <h1 class="display-3 fw-bold text-white mb-4 animate-fade-in">
+                        Welcome to <span class="text-gradient">istore.deals</span>
+                    </h1>
+                    <p class="lead text-white-75 mb-4 fs-5">
+                        Your smart tech destination for premium electronics, expert repairs, and hassle-free trade-ins. 
+                        Quality devices, competitive prices, exceptional service.
+                    </p>
+                    <div class="d-flex flex-column flex-sm-row gap-3 mb-4">
+                        <a href="{{ url_for('products') }}" class="btn btn-primary btn-lg px-4 py-3 fw-semibold">
+                            <i class="fas fa-shopping-bag me-2"></i>Shop Now
+                        </a>
+                        <a href="{{ url_for('sell_device') }}" class="btn btn-outline-light btn-lg px-4 py-3 fw-semibold">
+                            <i class="fas fa-mobile-alt me-2"></i>Sell Your Device
+                        </a>
+                    </div>
+                    <div class="hero-stats d-flex gap-4">
+                        <div class="stat-item">
+                            <div class="fw-bold fs-4 text-white">50K+</div>
+                            <div class="text-white-75 small">Happy Customers</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="fw-bold fs-4 text-white">24/7</div>
+                            <div class="text-white-75 small">Expert Support</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="fw-bold fs-4 text-white">99%</div>
+                            <div class="text-white-75 small">Satisfaction Rate</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-6">
-                <img src="https://via.placeholder.com/600x400?text=Electronics+Store" class="img-fluid rounded" alt="Electronics Store">
+            <div class="col-lg-6 order-1 order-lg-2 mb-5 mb-lg-0">
+                <div class="hero-device-showcase position-relative">
+                    <div class="floating-device device-1">
+                        <img src="https://images.unsplash.com/photo-1556656793-08538906a9f8?w=300&h=400&fit=crop&crop=center" 
+                             class="img-fluid rounded-4 shadow-lg" alt="iPhone">
+                    </div>
+                    <div class="floating-device device-2">
+                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=350&h=250&fit=crop&crop=center" 
+                             class="img-fluid rounded-4 shadow-lg" alt="MacBook">
+                    </div>
+                    <div class="floating-device device-3">
+                        <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=250&h=300&fit=crop&crop=center" 
+                             class="img-fluid rounded-4 shadow-lg" alt="iPad">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-scroll-indicator">
+        <i class="fas fa-chevron-down text-white animate-bounce"></i>
+    </div>
+</section>
+
+<!-- Service Highlights -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="service-card h-100 text-center p-4 bg-white rounded-4 shadow-sm">
+                    <div class="service-icon bg-primary bg-gradient rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                        <i class="fas fa-shopping-bag text-white fs-3"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Buy Premium Devices</h4>
+                    <p class="text-muted mb-3">Shop the latest smartphones, laptops, and accessories from top brands with warranty and quality guarantee.</p>
+                    <a href="{{ url_for('products') }}" class="btn btn-primary">Explore Products</a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="service-card h-100 text-center p-4 bg-white rounded-4 shadow-sm">
+                    <div class="service-icon bg-success bg-gradient rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                        <i class="fas fa-tools text-white fs-3"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Expert Repair Services</h4>
+                    <p class="text-muted mb-3">Professional device repair with certified technicians, genuine parts, and fast turnaround times.</p>
+                    <a href="{{ url_for('repair_service') }}" class="btn btn-success">Get Repair Quote</a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="service-card h-100 text-center p-4 bg-white rounded-4 shadow-sm">
+                    <div class="service-icon bg-warning bg-gradient rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                        <i class="fas fa-exchange-alt text-white fs-3"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Sell & Trade-In</h4>
+                    <p class="text-muted mb-3">Get instant quotes for your devices and trade-in for the best prices. Quick, secure, and hassle-free process.</p>
+                    <a href="{{ url_for('sell_device') }}" class="btn btn-warning">Sell Now</a>
+                </div>
             </div>
         </div>
     </div>
@@ -22,19 +105,39 @@
 <!-- Categories Section -->
 <section class="py-5">
     <div class="container">
-        <h2 class="text-center mb-4">Shop by Category</h2>
-        <div class="row">
+        <div class="text-center mb-5">
+            <h2 class="display-6 fw-bold mb-3">Shop by Category</h2>
+            <p class="lead text-muted">Discover premium electronics across all categories</p>
+        </div>
+        <div class="row g-4">
             {% for category in categories %}
-            <div class="col-md-4 col-lg-2 mb-4">
-                <div class="card h-100 text-center category-card">
-                    <div class="card-body">
-                        <i class="fas fa-mobile-alt fa-3x text-primary mb-3"></i>
-                        <h5 class="card-title">{{ category.name }}</h5>
-                        {% if category.name_ar %}
-                            <p class="card-text text-muted">{{ category.name_ar }}</p>
+            <div class="col-lg-2 col-md-4 col-6">
+                <div class="category-card h-100 text-center p-4 rounded-4 border-0 shadow-sm bg-white position-relative overflow-hidden">
+                    <div class="category-icon mb-3">
+                        {% if category.name == 'Smartphones' %}
+                            <i class="fas fa-mobile-alt fa-3x text-primary"></i>
+                        {% elif category.name == 'Laptops' %}
+                            <i class="fas fa-laptop fa-3x text-success"></i>
+                        {% elif category.name == 'Tablets' %}
+                            <i class="fas fa-tablet-alt fa-3x text-info"></i>
+                        {% elif category.name == 'Accessories' %}
+                            <i class="fas fa-headphones fa-3x text-warning"></i>
+                        {% elif category.name == 'Audio' %}
+                            <i class="fas fa-volume-up fa-3x text-danger"></i>
+                        {% elif category.name == 'Gaming' %}
+                            <i class="fas fa-gamepad fa-3x text-purple"></i>
+                        {% else %}
+                            <i class="fas fa-microchip fa-3x text-primary"></i>
                         {% endif %}
-                        <a href="{{ url_for('products', category=category.id) }}" class="btn btn-outline-primary">Browse</a>
                     </div>
+                    <h6 class="fw-semibold mb-2">{{ category.name }}</h6>
+                    {% if category.name_ar %}
+                        <p class="small text-muted mb-3">{{ category.name_ar }}</p>
+                    {% endif %}
+                    <a href="{{ url_for('products', category=category.id) }}" class="btn btn-outline-primary btn-sm fw-medium">
+                        Browse
+                    </a>
+                    <div class="category-hover-effect"></div>
                 </div>
             </div>
             {% endfor %}
@@ -45,58 +148,134 @@
 <!-- Featured Products Section -->
 <section class="py-5 bg-light">
     <div class="container">
-        <h2 class="text-center mb-4">Featured Products</h2>
-        <div class="row">
+        <div class="text-center mb-5">
+            <h2 class="display-6 fw-bold mb-3">Trending Deals</h2>
+            <p class="lead text-muted">Limited-time offers on premium electronics</p>
+        </div>
+        <div class="row g-4">
             {% for product in featured_products %}
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="card h-100 product-card">
-                    <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: cover;">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">{{ product.name }}</h5>
+            <div class="col-lg-3 col-md-6">
+                <div class="product-card h-100 bg-white rounded-4 shadow-sm border-0 overflow-hidden position-relative">
+                    {% if loop.index <= 2 %}
+                    <div class="product-badge position-absolute top-0 start-0 bg-danger text-white px-3 py-1 rounded-end-3">
+                        <small class="fw-bold">HOT DEAL</small>
+                    </div>
+                    {% endif %}
+                    <div class="product-image-container position-relative overflow-hidden">
+                        <img src="{{ product.image_url }}" class="card-img-top product-image" alt="{{ product.name }}" style="height: 250px; object-fit: cover;">
+                        <div class="product-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+                            <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn btn-primary btn-lg rounded-circle">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="mb-2">
+                            <span class="badge bg-light text-dark small">{{ product.category.name }}</span>
+                        </div>
+                        <h5 class="card-title fw-semibold mb-2">{{ product.name }}</h5>
                         {% if product.name_ar %}
-                            <p class="card-text text-muted small">{{ product.name_ar }}</p>
+                            <p class="card-text text-muted small mb-2">{{ product.name_ar }}</p>
                         {% endif %}
-                        <p class="card-text">{{ product.description[:100] }}...</p>
-                        <div class="mt-auto">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="h5 text-primary">${{ "%.2f"|format(product.price) }}</span>
-                                {% if product.stock_quantity > 0 %}
-                                    <span class="badge bg-success">In Stock</span>
-                                {% else %}
-                                    <span class="badge bg-danger">Out of Stock</span>
+                        <p class="card-text text-muted small mb-3">{{ product.description[:80] }}...</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="price-info">
+                                <span class="h5 text-primary fw-bold mb-0">${{ "%.2f"|format(product.price) }}</span>
+                                {% if loop.index <= 2 %}
+                                <div class="text-decoration-line-through text-muted small">${{ "%.2f"|format(product.price * 1.2) }}</div>
                                 {% endif %}
                             </div>
-                            <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn btn-primary w-100 mt-2">View Details</a>
+                            {% if product.stock_quantity > 0 %}
+                                <span class="badge bg-success-subtle text-success">In Stock ({{ product.stock_quantity }})</span>
+                            {% else %}
+                                <span class="badge bg-danger-subtle text-danger">Out of Stock</span>
+                            {% endif %}
+                        </div>
+                        <div class="d-grid">
+                            {% if current_user.is_authenticated and product.stock_quantity > 0 %}
+                                <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-primary fw-medium">
+                                    <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                                </a>
+                            {% else %}
+                                <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn btn-outline-primary fw-medium">
+                                    View Details
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
-        <div class="text-center mt-4">
-            <a href="{{ url_for('products') }}" class="btn btn-primary btn-lg">View All Products</a>
+        <div class="text-center mt-5">
+            <a href="{{ url_for('products') }}" class="btn btn-primary btn-lg px-5 py-3 fw-semibold">
+                <i class="fas fa-th-large me-2"></i>View All Products
+            </a>
         </div>
     </div>
 </section>
 
-<!-- Features Section -->
+<!-- Trust & Features Section -->
 <section class="py-5">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 text-center mb-4">
-                <i class="fas fa-shipping-fast fa-3x text-primary mb-3"></i>
-                <h4>Fast Shipping</h4>
-                <p>Quick and reliable delivery to your doorstep</p>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="feature-item">
+                    <div class="feature-icon bg-primary bg-gradient rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                        <i class="fas fa-shipping-fast text-white fs-4"></i>
+                    </div>
+                    <h5 class="fw-semibold mb-2">Free Fast Shipping</h5>
+                    <p class="text-muted small">Free delivery on orders over $50. Express shipping available nationwide.</p>
+                </div>
             </div>
-            <div class="col-md-4 text-center mb-4">
-                <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
-                <h4>Quality Guarantee</h4>
-                <p>All products come with manufacturer warranty</p>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="feature-item">
+                    <div class="feature-icon bg-success bg-gradient rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                        <i class="fas fa-shield-alt text-white fs-4"></i>
+                    </div>
+                    <h5 class="fw-semibold mb-2">Quality Guarantee</h5>
+                    <p class="text-muted small">All devices tested and certified. Full warranty coverage included.</p>
+                </div>
             </div>
-            <div class="col-md-4 text-center mb-4">
-                <i class="fas fa-headset fa-3x text-primary mb-3"></i>
-                <h4>24/7 Support</h4>
-                <p>Customer service available around the clock</p>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="feature-item">
+                    <div class="feature-icon bg-info bg-gradient rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                        <i class="fas fa-headset text-white fs-4"></i>
+                    </div>
+                    <h5 class="fw-semibold mb-2">24/7 Expert Support</h5>
+                    <p class="text-muted small">Technical support and customer service available around the clock.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="feature-item">
+                    <div class="feature-icon bg-warning bg-gradient rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                        <i class="fas fa-undo-alt text-white fs-4"></i>
+                    </div>
+                    <h5 class="fw-semibold mb-2">30-Day Returns</h5>
+                    <p class="text-muted small">Not satisfied? Return within 30 days for full refund or exchange.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h3 class="fw-bold mb-2">Stay Updated with Latest Deals</h3>
+                <p class="mb-0">Get exclusive offers, new product alerts, and tech news delivered to your inbox.</p>
+            </div>
+            <div class="col-lg-6">
+                <form class="row g-2">
+                    <div class="col-md-8">
+                        <input type="email" class="form-control form-control-lg" placeholder="Enter your email address" required>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-light btn-lg w-100 fw-semibold">Subscribe</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

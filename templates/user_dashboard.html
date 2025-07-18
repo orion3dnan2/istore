@@ -1,0 +1,358 @@
+{% extends "base.html" %}
+
+{% block title %}My Dashboard - istore.deals{% endblock %}
+
+{% block content %}
+<!-- Dashboard Header -->
+<section class="py-4 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="h3 fw-bold mb-2">Welcome back, {{ current_user.username }}!</h1>
+                <p class="text-muted mb-0">Manage your orders, repairs, and account settings</p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a href="{{ url_for('products') }}" class="btn btn-primary">
+                    <i class="fas fa-shopping-bag me-2"></i>Continue Shopping
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Dashboard Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Quick Stats -->
+            <div class="col-12">
+                <div class="row g-3 mb-4">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stat-card bg-primary text-white p-4 rounded-4">
+                            <div class="d-flex align-items-center">
+                                <div class="stat-icon me-3">
+                                    <i class="fas fa-shopping-cart fs-3"></i>
+                                </div>
+                                <div>
+                                    <div class="h4 fw-bold mb-0">{{ user_orders|length }}</div>
+                                    <small>Total Orders</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stat-card bg-success text-white p-4 rounded-4">
+                            <div class="d-flex align-items-center">
+                                <div class="stat-icon me-3">
+                                    <i class="fas fa-tools fs-3"></i>
+                                </div>
+                                <div>
+                                    <div class="h4 fw-bold mb-0">{{ repair_requests|length }}</div>
+                                    <small>Repair Requests</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stat-card bg-warning text-white p-4 rounded-4">
+                            <div class="d-flex align-items-center">
+                                <div class="stat-icon me-3">
+                                    <i class="fas fa-dollar-sign fs-3"></i>
+                                </div>
+                                <div>
+                                    <div class="h4 fw-bold mb-0">{{ sold_devices|length }}</div>
+                                    <small>Devices Sold</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stat-card bg-info text-white p-4 rounded-4">
+                            <div class="d-flex align-items-center">
+                                <div class="stat-icon me-3">
+                                    <i class="fas fa-heart fs-3"></i>
+                                </div>
+                                <div>
+                                    <div class="h4 fw-bold mb-0">0</div>
+                                    <small>Wishlist Items</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Dashboard Tabs -->
+            <div class="col-12">
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-header bg-white border-0 p-4">
+                        <ul class="nav nav-tabs card-header-tabs" id="dashboardTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active fw-semibold" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders" type="button" role="tab">
+                                    <i class="fas fa-shopping-cart me-2"></i>My Orders
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link fw-semibold" id="repairs-tab" data-bs-toggle="tab" data-bs-target="#repairs" type="button" role="tab">
+                                    <i class="fas fa-tools me-2"></i>Repair Requests
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link fw-semibold" id="selling-tab" data-bs-toggle="tab" data-bs-target="#selling" type="button" role="tab">
+                                    <i class="fas fa-dollar-sign me-2"></i>Selling History
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link fw-semibold" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab">
+                                    <i class="fas fa-user me-2"></i>Profile Settings
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        <div class="tab-content" id="dashboardTabsContent">
+                            <!-- Orders Tab -->
+                            <div class="tab-pane fade show active" id="orders" role="tabpanel">
+                                {% if user_orders %}
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Order ID</th>
+                                                <th>Date</th>
+                                                <th>Items</th>
+                                                <th>Total</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for order in user_orders %}
+                                            <tr>
+                                                <td class="fw-medium">#{{ order.id }}</td>
+                                                <td>{{ order.date.strftime('%Y-%m-%d') }}</td>
+                                                <td>{{ order.items_count }} items</td>
+                                                <td class="fw-semibold">${{ "%.2f"|format(order.total) }}</td>
+                                                <td>
+                                                    <span class="badge bg-{{ 'success' if order.status == 'completed' else 'warning' }}">
+                                                        {{ order.status|title }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {% else %}
+                                <div class="text-center py-5">
+                                    <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+                                    <h5 class="fw-semibold mb-2">No Orders Yet</h5>
+                                    <p class="text-muted mb-3">You haven't placed any orders yet. Start shopping to see your orders here.</p>
+                                    <a href="{{ url_for('products') }}" class="btn btn-primary">Shop Now</a>
+                                </div>
+                                {% endif %}
+                            </div>
+                            
+                            <!-- Repairs Tab -->
+                            <div class="tab-pane fade" id="repairs" role="tabpanel">
+                                {% if repair_requests %}
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Request ID</th>
+                                                <th>Device</th>
+                                                <th>Issue</th>
+                                                <th>Status</th>
+                                                <th>Date</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for repair in repair_requests %}
+                                            <tr>
+                                                <td class="fw-medium">#{{ repair.id }}</td>
+                                                <td>{{ repair.device_brand }} {{ repair.device_model }}</td>
+                                                <td>{{ repair.issue[:50] }}...</td>
+                                                <td>
+                                                    <span class="badge bg-{{ 'success' if repair.status == 'completed' else 'info' if repair.status == 'in_progress' else 'warning' }}">
+                                                        {{ repair.status|title }}
+                                                    </span>
+                                                </td>
+                                                <td>{{ repair.date.strftime('%Y-%m-%d') }}</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {% else %}
+                                <div class="text-center py-5">
+                                    <i class="fas fa-tools fa-3x text-muted mb-3"></i>
+                                    <h5 class="fw-semibold mb-2">No Repair Requests</h5>
+                                    <p class="text-muted mb-3">You haven't submitted any repair requests yet. Need device repair services?</p>
+                                    <a href="{{ url_for('repair_service') }}" class="btn btn-success">Request Repair</a>
+                                </div>
+                                {% endif %}
+                            </div>
+                            
+                            <!-- Selling Tab -->
+                            <div class="tab-pane fade" id="selling" role="tabpanel">
+                                {% if sold_devices %}
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Submission ID</th>
+                                                <th>Device</th>
+                                                <th>Condition</th>
+                                                <th>Quote</th>
+                                                <th>Status</th>
+                                                <th>Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for device in sold_devices %}
+                                            <tr>
+                                                <td class="fw-medium">#{{ device.id }}</td>
+                                                <td>{{ device.brand }} {{ device.model }}</td>
+                                                <td>{{ device.condition|title }}</td>
+                                                <td class="fw-semibold">${{ "%.2f"|format(device.quote_amount) }}</td>
+                                                <td>
+                                                    <span class="badge bg-{{ 'success' if device.status == 'paid' else 'info' if device.status == 'processing' else 'warning' }}">
+                                                        {{ device.status|title }}
+                                                    </span>
+                                                </td>
+                                                <td>{{ device.date.strftime('%Y-%m-%d') }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {% else %}
+                                <div class="text-center py-5">
+                                    <i class="fas fa-mobile-alt fa-3x text-muted mb-3"></i>
+                                    <h5 class="fw-semibold mb-2">No Devices Sold</h5>
+                                    <p class="text-muted mb-3">You haven't sold any devices yet. Get instant quotes for your electronics!</p>
+                                    <a href="{{ url_for('sell_device') }}" class="btn btn-warning">Sell Device</a>
+                                </div>
+                                {% endif %}
+                            </div>
+                            
+                            <!-- Profile Tab -->
+                            <div class="tab-pane fade" id="profile" role="tabpanel">
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <div class="card border-0 bg-light">
+                                            <div class="card-body p-4">
+                                                <h5 class="fw-semibold mb-3">Personal Information</h5>
+                                                <form>
+                                                    <div class="mb-3">
+                                                        <label for="username" class="form-label">Username</label>
+                                                        <input type="text" class="form-control" id="username" value="{{ current_user.username }}" readonly>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="email" class="form-label">Email Address</label>
+                                                        <input type="email" class="form-control" id="email" value="{{ current_user.email }}" readonly>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="member_since" class="form-label">Member Since</label>
+                                                        <input type="text" class="form-control" id="member_since" value="{{ current_user.created_at.strftime('%B %Y') }}" readonly>
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary">Edit Profile</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="card border-0 bg-light">
+                                            <div class="card-body p-4">
+                                                <h5 class="fw-semibold mb-3">Account Settings</h5>
+                                                <div class="d-grid gap-2">
+                                                    <button type="button" class="btn btn-outline-primary text-start">
+                                                        <i class="fas fa-key me-2"></i>Change Password
+                                                    </button>
+                                                    <button type="button" class="btn btn-outline-primary text-start">
+                                                        <i class="fas fa-bell me-2"></i>Notification Preferences
+                                                    </button>
+                                                    <button type="button" class="btn btn-outline-primary text-start">
+                                                        <i class="fas fa-credit-card me-2"></i>Payment Methods
+                                                    </button>
+                                                    <button type="button" class="btn btn-outline-primary text-start">
+                                                        <i class="fas fa-map-marker-alt me-2"></i>Shipping Addresses
+                                                    </button>
+                                                    <hr>
+                                                    <button type="button" class="btn btn-outline-danger text-start">
+                                                        <i class="fas fa-trash me-2"></i>Delete Account
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Actions -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h3 class="fw-bold mb-2">Quick Actions</h3>
+            <p class="text-muted">What would you like to do next?</p>
+        </div>
+        
+        <div class="row g-3 justify-content-center">
+            <div class="col-lg-2 col-md-4 col-6">
+                <a href="{{ url_for('products') }}" class="btn btn-outline-primary w-100 p-3 h-100 d-flex flex-column align-items-center">
+                    <i class="fas fa-shopping-bag fs-4 mb-2"></i>
+                    <span class="small fw-medium">Shop Products</span>
+                </a>
+            </div>
+            
+            <div class="col-lg-2 col-md-4 col-6">
+                <a href="{{ url_for('cart') }}" class="btn btn-outline-primary w-100 p-3 h-100 d-flex flex-column align-items-center">
+                    <i class="fas fa-shopping-cart fs-4 mb-2"></i>
+                    <span class="small fw-medium">View Cart</span>
+                </a>
+            </div>
+            
+            <div class="col-lg-2 col-md-4 col-6">
+                <a href="{{ url_for('repair_service') }}" class="btn btn-outline-success w-100 p-3 h-100 d-flex flex-column align-items-center">
+                    <i class="fas fa-tools fs-4 mb-2"></i>
+                    <span class="small fw-medium">Repair Device</span>
+                </a>
+            </div>
+            
+            <div class="col-lg-2 col-md-4 col-6">
+                <a href="{{ url_for('sell_device') }}" class="btn btn-outline-warning w-100 p-3 h-100 d-flex flex-column align-items-center">
+                    <i class="fas fa-dollar-sign fs-4 mb-2"></i>
+                    <span class="small fw-medium">Sell Device</span>
+                </a>
+            </div>
+            
+            <div class="col-lg-2 col-md-4 col-6">
+                <a href="#" class="btn btn-outline-info w-100 p-3 h-100 d-flex flex-column align-items-center">
+                    <i class="fas fa-headset fs-4 mb-2"></i>
+                    <span class="small fw-medium">Get Support</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

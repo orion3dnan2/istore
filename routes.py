@@ -315,6 +315,56 @@ def admin_delete_category(category_id):
     
     return redirect(url_for('admin_categories'))
 
+# New Service Routes for istore.deals
+@app.route('/repair-service', methods=['GET', 'POST'])
+def repair_service():
+    if request.method == 'POST':
+        # Handle repair service form submission
+        device_type = request.form.get('device_type')
+        brand = request.form.get('brand')
+        model = request.form.get('model')
+        issue_description = request.form.get('issue_description')
+        customer_name = request.form.get('customer_name')
+        customer_email = request.form.get('customer_email')
+        customer_phone = request.form.get('customer_phone')
+        
+        # Here you would typically save to database or send email
+        flash('Repair request submitted successfully! We will contact you within 24 hours.', 'success')
+        return redirect(url_for('repair_service'))
+    
+    return render_template('repair_service.html')
+
+@app.route('/sell-device', methods=['GET', 'POST'])
+def sell_device():
+    if request.method == 'POST':
+        # Handle sell device form submission
+        device_type = request.form.get('device_type')
+        brand = request.form.get('brand')
+        model = request.form.get('model')
+        condition = request.form.get('condition')
+        description = request.form.get('description')
+        customer_name = request.form.get('customer_name')
+        customer_email = request.form.get('customer_email')
+        customer_phone = request.form.get('customer_phone')
+        
+        # Here you would typically calculate price and save to database
+        flash('Device submission received! We will evaluate your device and contact you with a quote.', 'success')
+        return redirect(url_for('sell_device'))
+    
+    return render_template('sell_device.html')
+
+@app.route('/dashboard')
+@login_required
+def user_dashboard():
+    user_orders = []  # You would fetch user's orders from database
+    repair_requests = []  # You would fetch user's repair requests from database
+    sold_devices = []  # You would fetch user's sold devices from database
+    
+    return render_template('user_dashboard.html', 
+                         user_orders=user_orders,
+                         repair_requests=repair_requests,
+                         sold_devices=sold_devices)
+
 # Error handlers
 @app.errorhandler(404)
 def not_found(error):
