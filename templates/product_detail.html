@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} - Electronics Store{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <img src="{{ product.image_url }}" class="img-fluid rounded" alt="{{ product.name }}">
+        </div>
+        <div class="col-md-6">
+            <h1>{{ product.name }}</h1>
+            {% if product.name_ar %}
+                <p class="text-muted">{{ product.name_ar }}</p>
+            {% endif %}
+            
+            <div class="mb-3">
+                <span class="badge bg-secondary">{{ product.category.name }}</span>
+                {% if product.category.name_ar %}
+                    <span class="badge bg-secondary">{{ product.category.name_ar }}</span>
+                {% endif %}
+            </div>
+            
+            <div class="mb-3">
+                <span class="h3 text-primary">${{ "%.2f"|format(product.price) }}</span>
+            </div>
+            
+            <div class="mb-3">
+                {% if product.stock_quantity > 0 %}
+                    <span class="badge bg-success fs-6">{{ product.stock_quantity }} in stock</span>
+                {% else %}
+                    <span class="badge bg-danger fs-6">Out of Stock</span>
+                {% endif %}
+            </div>
+            
+            <div class="mb-4">
+                <h5>Description</h5>
+                <p>{{ product.description }}</p>
+            </div>
+            
+            {% if current_user.is_authenticated %}
+                {% if product.stock_quantity > 0 %}
+                    <div class="d-grid gap-2">
+                        <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
+                        </a>
+                    </div>
+                {% else %}
+                    <button class="btn btn-secondary btn-lg" disabled>
+                        <i class="fas fa-times"></i> Out of Stock
+                    </button>
+                {% endif %}
+            {% else %}
+                <div class="alert alert-info">
+                    <a href="{{ url_for('login') }}">Login</a> to add items to your cart.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- Related Products -->
+    {% if related_products %}
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3>Related Products</h3>
+            <div class="row">
+                {% for related_product in related_products %}
+                    {% if related_product.id != product.id %}
+                    <div class="col-md-3 mb-4">
+                        <div class="card h-100">
+                            <img src="{{ related_product.image_url }}" class="card-img-top" alt="{{ related_product.name }}" style="height: 200px; object-fit: cover;">
+                            <div class="card-body d-flex flex-column">
+                                <h6 class="card-title">{{ related_product.name }}</h6>
+                                <p class="card-text text-primary">${{ "%.2f"|format(related_product.price) }}</p>
+                                <a href="{{ url_for('product_detail', product_id=related_product.id) }}" class="btn btn-sm btn-outline-primary mt-auto">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
