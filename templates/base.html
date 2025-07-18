@@ -25,35 +25,37 @@
         html[lang="en"] body { font-family: 'Inter', sans-serif; }
         html[lang="ar"] body { font-family: 'Tajawal', sans-serif; }
         
-        /* Gradient backgrounds */
-        .bg-gradient-primary {
+        /* Modern gradients */
+        .bg-gradient-modern {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
-        .bg-gradient-secondary {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
         .bg-gradient-tech {
-            background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        }
+        .bg-gradient-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
         }
         
         /* Smooth animations */
         .transition-all-300 {
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Modern shadows */
+        .shadow-modern {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Hover effects */
+        .hover-lift:hover {
+            transform: translateY(-4px);
         }
         
         /* Glass effect */
         .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        /* Dark mode support */
-        @media (prefers-color-scheme: dark) {
-            .glass-effect {
-                background: rgba(0, 0, 0, 0.1);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-            }
         }
     </style>
     
@@ -77,12 +79,18 @@
         
         // Language switcher function
         function switchLanguage(lang) {
+            // Update document direction
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            
+            // Update font family
             if (lang === 'ar') {
-                document.documentElement.dir = 'rtl';
-                document.body.className = document.body.className.replace('font-inter', 'font-tajawal');
+                document.body.style.fontFamily = 'Tajawal, sans-serif';
+                document.body.classList.remove('font-inter');
+                document.body.classList.add('font-tajawal');
             } else {
-                document.documentElement.dir = 'ltr';
-                document.body.className = document.body.className.replace('font-tajawal', 'font-inter');
+                document.body.style.fontFamily = 'Inter, sans-serif';
+                document.body.classList.remove('font-tajawal');
+                document.body.classList.add('font-inter');
             }
             
             // Navigate to language switch route
@@ -101,32 +109,32 @@
     </script>
 </head>
 <body class="bg-gray-50 text-gray-900 antialiased">
-    <!-- Modern Navigation Header -->
-    <nav class="bg-white shadow-lg sticky top-0 z-50 transition-all-300">
+    <!-- Modern Clean Navigation Header -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <a href="{{ url_for('index') }}" class="flex items-center space-x-2 rtl:space-x-reverse">
-                        <div class="bg-gradient-tech rounded-lg p-2">
-                            <i class="fas fa-store text-white text-xl"></i>
+                    <a href="{{ url_for('index') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+                        <div class="bg-blue-600 rounded-lg p-2">
+                            <i class="fas fa-store text-white text-lg"></i>
                         </div>
-                        <span class="text-2xl font-bold text-gray-900">{{ get_text('site_title') }}</span>
+                        <span class="text-xl font-bold text-gray-900">{{ get_text('site_title') }}</span>
                     </a>
                 </div>
 
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
-                    <a href="{{ url_for('index') }}" class="text-gray-700 hover:text-primary transition-colors font-medium">
+                    <a href="{{ url_for('index') }}" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">
                         {{ get_text('nav.home') }}
                     </a>
-                    <a href="{{ url_for('products') }}" class="text-gray-700 hover:text-primary transition-colors font-medium">
+                    <a href="{{ url_for('products') }}" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">
                         {{ get_text('nav.products') }}
                     </a>
-                    <a href="{{ url_for('repair_service') }}" class="text-gray-700 hover:text-primary transition-colors font-medium">
+                    <a href="{{ url_for('repair_service') }}" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">
                         {{ get_text('nav.repair') }}
                     </a>
-                    <a href="{{ url_for('sell_device') }}" class="text-gray-700 hover:text-primary transition-colors font-medium">
+                    <a href="{{ url_for('sell_device') }}" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">
                         {{ get_text('nav.sell') }}
                     </a>
                 </div>
@@ -135,27 +143,28 @@
                 <div class="flex items-center space-x-4 rtl:space-x-reverse">
                     <!-- Language Switcher -->
                     <div class="relative">
-                        <button id="languageToggle" class="flex items-center space-x-2 rtl:space-x-reverse px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
-                            <i class="fas fa-globe text-gray-600"></i>
+                        <button id="languageToggle" class="flex items-center space-x-2 rtl:space-x-reverse px-3 py-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-200">
+                            <i class="fas fa-globe text-gray-500 text-sm"></i>
                             <span class="text-sm font-medium text-gray-700">
-                                {% if current_lang == 'ar' %}ع{% else %}EN{% endif %}
+                                {% if current_lang == 'ar' %}العربية{% else %}English{% endif %}
                             </span>
+                            <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
                         </button>
-                        <div id="languageDropdown" class="absolute right-0 rtl:right-auto rtl:left-0 mt-2 w-32 bg-white rounded-lg shadow-lg border hidden">
-                            <a href="javascript:void(0)" onclick="switchLanguage('en')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-t-lg">
-                                English
+                        <div id="languageDropdown" class="absolute right-0 rtl:right-auto rtl:left-0 mt-2 w-36 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
+                            <a href="javascript:void(0)" onclick="switchLanguage('en')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-t-lg">
+                                <i class="fas fa-globe mr-2 rtl:mr-0 rtl:ml-2"></i>English
                             </a>
-                            <a href="javascript:void(0)" onclick="switchLanguage('ar')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-b-lg">
-                                العربية
+                            <a href="javascript:void(0)" onclick="switchLanguage('ar')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-b-lg">
+                                <i class="fas fa-globe mr-2 rtl:mr-0 rtl:ml-2"></i>العربية
                             </a>
                         </div>
                     </div>
 
                     <!-- Cart Icon -->
                     {% if current_user.is_authenticated %}
-                        <a href="{{ url_for('cart') }}" class="relative p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                        <a href="{{ url_for('cart') }}" class="relative p-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
                             <i class="fas fa-shopping-cart text-gray-600"></i>
-                            <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                            <span class="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">0</span>
                         </a>
                     {% endif %}
 
@@ -164,19 +173,19 @@
                         {% if current_user.is_authenticated %}
                             <div class="flex items-center space-x-3 rtl:space-x-reverse">
                                 {% if current_user.is_admin %}
-                                    <a href="{{ url_for('admin_dashboard') }}" class="text-sm text-gray-700 hover:text-primary transition-colors">
-                                        <i class="fas fa-cog mr-1"></i>{{ get_text('nav.admin') }}
+                                    <a href="{{ url_for('admin_dashboard') }}" class="text-sm text-gray-600 hover:text-blue-600 transition-colors">
+                                        <i class="fas fa-cog mr-1 rtl:mr-0 rtl:ml-1"></i>{{ get_text('nav.admin') }}
                                     </a>
                                 {% endif %}
-                                <a href="{{ url_for('logout') }}" class="text-sm text-gray-700 hover:text-primary transition-colors">
+                                <a href="{{ url_for('logout') }}" class="text-sm text-gray-600 hover:text-blue-600 transition-colors">
                                     {{ get_text('nav.logout') }}
                                 </a>
                             </div>
                         {% else %}
-                            <a href="{{ url_for('login') }}" class="text-sm text-gray-700 hover:text-primary transition-colors font-medium">
+                            <a href="{{ url_for('login') }}" class="text-sm text-gray-600 hover:text-blue-600 transition-colors font-medium">
                                 {{ get_text('nav.login') }}
                             </a>
-                            <a href="{{ url_for('register') }}" class="bg-gradient-tech text-white px-4 py-2 rounded-lg hover:opacity-90 transition-opacity text-sm font-medium">
+                            <a href="{{ url_for('register') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
                                 {{ get_text('nav.register') }}
                             </a>
                         {% endif %}
@@ -191,18 +200,18 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
-            <div class="px-4 py-3 space-y-2">
-                <a href="{{ url_for('index') }}" class="block py-2 text-gray-700 hover:text-primary transition-colors">
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-4 py-3 space-y-1">
+                <a href="{{ url_for('index') }}" class="block py-2 text-gray-600 hover:text-blue-600 transition-colors">
                     {{ get_text('nav.home') }}
                 </a>
-                <a href="{{ url_for('products') }}" class="block py-2 text-gray-700 hover:text-primary transition-colors">
+                <a href="{{ url_for('products') }}" class="block py-2 text-gray-600 hover:text-blue-600 transition-colors">
                     {{ get_text('nav.products') }}
                 </a>
-                <a href="{{ url_for('repair_service') }}" class="block py-2 text-gray-700 hover:text-primary transition-colors">
+                <a href="{{ url_for('repair_service') }}" class="block py-2 text-gray-600 hover:text-blue-600 transition-colors">
                     {{ get_text('nav.repair') }}
                 </a>
-                <a href="{{ url_for('sell_device') }}" class="block py-2 text-gray-700 hover:text-primary transition-colors">
+                <a href="{{ url_for('sell_device') }}" class="block py-2 text-gray-600 hover:text-blue-600 transition-colors">
                     {{ get_text('nav.sell') }}
                 </a>
             </div>

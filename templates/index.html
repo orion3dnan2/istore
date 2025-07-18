@@ -2,78 +2,66 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section class="relative bg-gradient-tech overflow-hidden">
-    <!-- Background Pattern -->
-    <div class="absolute inset-0 bg-black opacity-10"></div>
-    <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><circle cx="30" cy="30" r="2"/></g></svg>'); background-size: 60px 60px;"></div>
-    
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+<section class="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
-            <!-- Hero Title -->
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                 {{ get_text('home.hero_title') }}
             </h1>
-            
-            <!-- Hero Subtitle -->
-            <p class="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
                 {{ get_text('home.hero_subtitle') }}
             </p>
-            
-            <!-- CTA Buttons -->
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="{{ url_for('products') }}" class="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg transform hover:scale-105">
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{{ url_for('products') }}" 
+                   class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-flex items-center justify-center">
                     <i class="fas fa-shopping-bag mr-2 rtl:mr-0 rtl:ml-2"></i>
                     {{ get_text('home.shop_now') }}
                 </a>
-                <a href="{{ url_for('repair_service') }}" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors transform hover:scale-105">
+                <a href="{{ url_for('repair_service') }}" 
+                   class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors border border-blue-200 inline-flex items-center justify-center">
                     <i class="fas fa-tools mr-2 rtl:mr-0 rtl:ml-2"></i>
                     {{ get_text('home.request_repair') }}
                 </a>
             </div>
         </div>
     </div>
-    
-    <!-- Wave decoration -->
-    <div class="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1200 120" class="w-full h-8 fill-current text-gray-50">
-            <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"></path>
-        </svg>
-    </div>
 </section>
 
 <!-- Service Cards Section -->
-<section class="py-16 bg-gray-50">
+<section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-2 gap-8">
             <!-- Repair Service Card -->
-            <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-8 text-white shadow-2xl transform hover:scale-105 transition-transform">
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-8 hover:shadow-xl transition-shadow hover-lift">
                 <div class="flex items-center mb-6">
-                    <div class="bg-white bg-opacity-20 rounded-full p-4 mr-4 rtl:mr-0 rtl:ml-4">
-                        <i class="fas fa-tools text-2xl"></i>
+                    <div class="bg-blue-100 rounded-full p-3 mr-4 rtl:mr-0 rtl:ml-4">
+                        <i class="fas fa-tools text-blue-600 text-xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold">{{ get_text('home.repair_banner') }}</h3>
+                    <h3 class="text-xl font-bold text-gray-900">{{ get_text('home.repair_banner') }}</h3>
                 </div>
-                <p class="text-blue-100 mb-6 text-lg leading-relaxed">
+                <p class="text-gray-600 mb-6 leading-relaxed">
                     {{ get_text('home.repair_description') }}
                 </p>
-                <a href="{{ url_for('repair_service') }}" class="inline-flex items-center bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                <a href="{{ url_for('repair_service') }}" 
+                   class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors">
                     {{ get_text('home.request_repair') }}
                     <i class="fas fa-arrow-right ml-2 rtl:ml-0 rtl:mr-2"></i>
                 </a>
             </div>
             
             <!-- Sell Device Card -->
-            <div class="bg-gradient-to-r from-green-500 to-teal-600 rounded-2xl p-8 text-white shadow-2xl transform hover:scale-105 transition-transform">
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-8 hover:shadow-xl transition-shadow hover-lift">
                 <div class="flex items-center mb-6">
-                    <div class="bg-white bg-opacity-20 rounded-full p-4 mr-4 rtl:mr-0 rtl:ml-4">
-                        <i class="fas fa-mobile-alt text-2xl"></i>
+                    <div class="bg-green-100 rounded-full p-3 mr-4 rtl:mr-0 rtl:ml-4">
+                        <i class="fas fa-mobile-alt text-green-600 text-xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold">{{ get_text('home.sell_banner') }}</h3>
+                    <h3 class="text-xl font-bold text-gray-900">{{ get_text('home.sell_banner') }}</h3>
                 </div>
-                <p class="text-green-100 mb-6 text-lg leading-relaxed">
+                <p class="text-gray-600 mb-6 leading-relaxed">
                     {{ get_text('home.sell_description') }}
                 </p>
-                <a href="{{ url_for('sell_device') }}" class="inline-flex items-center bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                <a href="{{ url_for('sell_device') }}" 
+                   class="inline-flex items-center text-green-600 font-semibold hover:text-green-700 transition-colors">
                     {{ get_text('nav.sell') }}
                     <i class="fas fa-arrow-right ml-2 rtl:ml-0 rtl:mr-2"></i>
                 </a>
@@ -83,17 +71,17 @@
 </section>
 
 <!-- Featured Categories Section -->
-<section class="py-16 bg-white">
+<section class="py-16 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">
                 {{ get_text('home.featured_categories') }}
             </h2>
-            <p class="text-xl text-gray-600">
+            <p class="text-lg text-gray-600">
                 {% if current_lang == 'ar' %}
-                    تصفح مجموعتنا الواسعة من الأجهزة الإلكترونية
+                    تصفح مجموعتنا الواسعة من الأجهزة الإلكترونية عالية الجودة
                 {% else %}
-                    Browse our wide range of electronic devices
+                    Browse our wide range of high-quality electronic devices
                 {% endif %}
             </p>
         </div>
@@ -101,8 +89,8 @@
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {% for category in categories %}
             <a href="{{ url_for('products', category=category.id) }}" class="group">
-                <div class="bg-gray-50 rounded-xl p-6 text-center hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-200">
-                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">
+                <div class="bg-white rounded-lg p-6 text-center shadow-sm hover:shadow-lg transition-all hover-lift border border-gray-200">
+                    <div class="text-3xl mb-4 group-hover:scale-110 transition-transform">
                         {% if category.slug == 'smartphones' %}
                             <i class="fas fa-mobile-alt text-blue-500"></i>
                         {% elif category.slug == 'laptops' %}
@@ -115,6 +103,10 @@
                             <i class="fas fa-headphones text-orange-500"></i>
                         {% elif category.slug == 'smart-home' %}
                             <i class="fas fa-home text-teal-500"></i>
+                        {% elif category.slug == 'cameras' %}
+                            <i class="fas fa-camera text-pink-500"></i>
+                        {% elif category.slug == 'wearables' %}
+                            <i class="fas fa-watch text-indigo-500"></i>
                         {% else %}
                             <i class="fas fa-plug text-gray-500"></i>
                         {% endif %}
@@ -122,7 +114,7 @@
                     <h3 class="font-semibold text-gray-900 mb-2">
                         {{ get_localized_field(category, 'name') }}
                     </h3>
-                    <p class="text-sm text-gray-600">
+                    <p class="text-sm text-gray-500">
                         {% if current_lang == 'ar' %}
                             تصفح الآن
                         {% else %}
@@ -136,46 +128,64 @@
     </div>
 </section>
 
-<!-- Featured Products Section -->
+<!-- Top Deals Section -->
 {% if featured_products %}
-<section class="py-16 bg-gray-50">
+<section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">
                 {{ get_text('home.top_deals') }}
             </h2>
-            <p class="text-xl text-gray-600">
+            <p class="text-lg text-gray-600">
                 {% if current_lang == 'ar' %}
-                    اكتشف أفضل العروض على الأجهزة الإلكترونية
+                    اكتشف أفضل العروض والأسعار المميزة على أحدث الأجهزة
                 {% else %}
-                    Discover the best deals on electronic devices
+                    Discover the best deals and special prices on the latest devices
                 {% endif %}
             </p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {% for product in featured_products %}
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
-                <div class="relative overflow-hidden">
-                    <img src="{{ product.image_url }}" alt="{{ get_localized_field(product, 'name') }}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform">
-                    <div class="absolute top-4 left-4 rtl:left-auto rtl:right-4">
-                        <span class="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
+            <div class="bg-white rounded-lg shadow-sm hover:shadow-lg transition-all hover-lift border border-gray-200 overflow-hidden">
+                <div class="relative">
+                    <img src="{{ product.image_url }}" alt="{{ get_localized_field(product, 'name') }}" 
+                         class="w-full h-48 object-cover">
+                    <div class="absolute top-3 left-3 rtl:left-auto rtl:right-3">
+                        <span class="bg-blue-600 text-white px-2 py-1 rounded-md text-xs font-medium">
                             {% if current_lang == 'ar' %}جديد{% else %}New{% endif %}
                         </span>
                     </div>
+                    {% if product.stock_quantity <= 5 %}
+                    <div class="absolute top-3 right-3 rtl:right-auto rtl:left-3">
+                        <span class="bg-red-500 text-white px-2 py-1 rounded-md text-xs font-medium">
+                            {% if current_lang == 'ar' %}كمية قليلة{% else %}Limited{% endif %}
+                        </span>
+                    </div>
+                    {% endif %}
                 </div>
-                <div class="p-6">
-                    <h3 class="font-semibold text-gray-900 mb-2">
+                <div class="p-5">
+                    <h3 class="font-semibold text-gray-900 mb-2 text-sm">
                         {{ get_localized_field(product, 'name') }}
                     </h3>
-                    <p class="text-gray-600 text-sm mb-4">
-                        {{ get_localized_field(product, 'description')[:100] }}...
+                    <p class="text-gray-600 text-xs mb-3 line-clamp-2">
+                        {{ get_localized_field(product, 'description')[:80] }}{% if get_localized_field(product, 'description')|length > 80 %}...{% endif %}
                     </p>
                     <div class="flex items-center justify-between">
-                        <span class="text-2xl font-bold text-primary">
-                            ${{ product.price }}
-                        </span>
-                        <a href="{{ url_for('product_detail', product_id=product.id) }}" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium">
+                        <div class="flex flex-col">
+                            <span class="text-lg font-bold text-gray-900">
+                                ${{ "%.2f"|format(product.price) }}
+                            </span>
+                            <span class="text-xs text-gray-500">
+                                {% if current_lang == 'ar' %}
+                                    متوفر: {{ product.stock_quantity }}
+                                {% else %}
+                                    In stock: {{ product.stock_quantity }}
+                                {% endif %}
+                            </span>
+                        </div>
+                        <a href="{{ url_for('product_detail', product_id=product.id) }}" 
+                           class="bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 transition-colors text-xs font-medium">
                             {% if current_lang == 'ar' %}عرض{% else %}View{% endif %}
                         </a>
                     </div>
@@ -184,14 +194,15 @@
             {% endfor %}
         </div>
         
-        <div class="text-center mt-12">
-            <a href="{{ url_for('products') }}" class="inline-flex items-center bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
+        <div class="text-center mt-10">
+            <a href="{{ url_for('products') }}" 
+               class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-flex items-center">
                 {% if current_lang == 'ar' %}
                     عرض جميع المنتجات
-                    <i class="fas fa-arrow-left ml-2"></i>
+                    <i class="fas fa-arrow-left ml-2 rtl:ml-0 rtl:mr-2"></i>
                 {% else %}
                     View All Products
-                    <i class="fas fa-arrow-right ml-2"></i>
+                    <i class="fas fa-arrow-right ml-2 rtl:ml-0 rtl:mr-2"></i>
                 {% endif %}
             </a>
         </div>
@@ -199,23 +210,55 @@
 </section>
 {% endif %}
 
-<!-- Footer -->
-<footer class="bg-gray-900 text-white py-12">
+<!-- Newsletter Section -->
+<section class="py-16 bg-gray-900 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-4 gap-8">
+        <div class="text-center">
+            <h2 class="text-3xl font-bold mb-4">
+                {% if current_lang == 'ar' %}
+                    اشترك في النشرة الإخبارية
+                {% else %}
+                    Stay Updated
+                {% endif %}
+            </h2>
+            <p class="text-xl text-gray-300 mb-8">
+                {% if current_lang == 'ar' %}
+                    احصل على آخر العروض والمنتجات الجديدة
+                {% else %}
+                    Get the latest deals and new products
+                {% endif %}
+            </p>
+            <div class="max-w-md mx-auto">
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input type="email" 
+                           placeholder="{% if current_lang == 'ar' %}أدخل بريدك الإلكتروني{% else %}Enter your email{% endif %}"
+                           class="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                        {% if current_lang == 'ar' %}اشترك{% else %}Subscribe{% endif %}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <!-- Company Info -->
             <div>
                 <div class="flex items-center mb-4">
-                    <div class="bg-gradient-tech rounded-lg p-2 mr-3 rtl:mr-0 rtl:ml-3">
-                        <i class="fas fa-store text-white text-lg"></i>
+                    <div class="bg-blue-600 rounded-lg p-2 mr-3 rtl:mr-0 rtl:ml-3">
+                        <i class="fas fa-store text-white"></i>
                     </div>
                     <span class="text-xl font-bold">{{ get_text('site_title') }}</span>
                 </div>
                 <p class="text-gray-400 mb-4">
                     {% if current_lang == 'ar' %}
-                        {{ store_settings.slogan_ar if store_settings else 'متجر الإلكترونيات الموثوق' }}
+                        {{ store_settings.slogan_ar if store_settings else 'متجر الإلكترونيات الموثوق للأجهزة الجديدة والمستعملة' }}
                     {% else %}
-                        {{ store_settings.slogan_en if store_settings else 'Your trusted electronics store' }}
+                        {{ store_settings.slogan_en if store_settings else 'Your trusted electronics store for new and used devices' }}
                     {% endif %}
                 </p>
                 <div class="flex space-x-4 rtl:space-x-reverse">
@@ -239,7 +282,13 @@
             
             <!-- Quick Links -->
             <div>
-                <h3 class="text-lg font-semibold mb-4">{{ get_text('footer.links') }}</h3>
+                <h3 class="text-lg font-semibold mb-4">
+                    {% if current_lang == 'ar' %}
+                        روابط سريعة
+                    {% else %}
+                        Quick Links
+                    {% endif %}
+                </h3>
                 <ul class="space-y-2">
                     <li><a href="{{ url_for('index') }}" class="text-gray-400 hover:text-white transition-colors">{{ get_text('nav.home') }}</a></li>
                     <li><a href="{{ url_for('products') }}" class="text-gray-400 hover:text-white transition-colors">{{ get_text('nav.products') }}</a></li>
@@ -260,7 +309,13 @@
             
             <!-- Contact Info -->
             <div>
-                <h3 class="text-lg font-semibold mb-4">{{ get_text('footer.contact') }}</h3>
+                <h3 class="text-lg font-semibold mb-4">
+                    {% if current_lang == 'ar' %}
+                        تواصل معنا
+                    {% else %}
+                        Contact Us
+                    {% endif %}
+                </h3>
                 <ul class="space-y-2">
                     {% if store_settings and store_settings.email %}
                         <li class="flex items-center">
@@ -280,16 +335,22 @@
                             <a href="https://wa.me/{{ store_settings.whatsapp }}" class="text-gray-400 hover:text-white transition-colors">WhatsApp</a>
                         </li>
                     {% endif %}
+                    {% if not store_settings or not store_settings.email %}
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-gray-400 mr-2 rtl:mr-0 rtl:ml-2"></i>
+                            <span class="text-gray-400">info@istore.deals</span>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
         
-        <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center">
             <p class="text-gray-400">
                 {% if current_lang == 'ar' %}
-                    {{ store_settings.copyright_ar if store_settings else '© ٢٠٢٥ istore.deals' }}
+                    {{ store_settings.copyright_ar if store_settings else '© ٢٠٢٥ istore.deals. جميع الحقوق محفوظة.' }}
                 {% else %}
-                    {{ store_settings.copyright_en if store_settings else '© 2025 istore.deals' }}
+                    {{ store_settings.copyright_en if store_settings else '© 2025 istore.deals. All rights reserved.' }}
                 {% endif %}
             </p>
         </div>
