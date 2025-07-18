@@ -1,236 +1,603 @@
 {% extends "base.html" %}
 
-{% block title %}Device Repair Service - istore.deals{% endblock %}
+{% block title %}{{ get_text('repair.title') }} - {{ get_text('site_title') }}{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
-<section class="py-5 bg-primary text-white">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <h1 class="display-5 fw-bold mb-3">Expert Device Repair</h1>
-                <p class="lead mb-4">Professional repair services for all your electronic devices. Certified technicians, genuine parts, and fast turnaround times.</p>
-                <div class="d-flex gap-4 mb-4">
+<section class="relative bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 py-20 overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="%23ffffff" stroke-width="1"><circle cx="40" cy="40" r="2"/><path d="M40 30v-5M40 55v-5M30 40h-5M55 40h-5M47 33l4-4M33 47l-4 4M47 47l4 4M33 33l-4-4"/></g></svg>'); background-size: 80px 80px;"></div>
+    </div>
+    
+    <!-- Floating Repair Icons -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-20 left-16 text-white opacity-10 animate-pulse">
+            <i class="fas fa-wrench text-5xl"></i>
+        </div>
+        <div class="absolute top-32 right-20 text-white opacity-10 animate-pulse" style="animation-delay: 1s;">
+            <i class="fas fa-screwdriver text-4xl"></i>
+        </div>
+        <div class="absolute bottom-40 left-32 text-white opacity-10 animate-pulse" style="animation-delay: 2s;">
+            <i class="fas fa-microchip text-4xl"></i>
+        </div>
+        <div class="absolute bottom-24 right-32 text-white opacity-10 animate-pulse" style="animation-delay: 3s;">
+            <i class="fas fa-cogs text-5xl"></i>
+        </div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <!-- Left Content -->
+            <div>
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                    {{ get_text('repair.hero_title') }}
+                </h1>
+                <p class="text-xl text-blue-100 mb-8 leading-relaxed">
+                    {{ get_text('repair.hero_subtitle') }}
+                </p>
+                
+                <!-- Stats -->
+                <div class="grid grid-cols-3 gap-6 mb-8">
                     <div class="text-center">
-                        <div class="h4 fw-bold">24-48hrs</div>
-                        <small>Average Repair Time</small>
+                        <div class="text-3xl font-bold text-white mb-2">24-48</div>
+                        <div class="text-sm text-blue-200">
+                            {% if current_lang == 'ar' %}
+                                ساعة متوسط الإصلاح
+                            {% else %}
+                                Hours Average Repair
+                            {% endif %}
+                        </div>
                     </div>
                     <div class="text-center">
-                        <div class="h4 fw-bold">90 Days</div>
-                        <small>Repair Warranty</small>
+                        <div class="text-3xl font-bold text-white mb-2">90</div>
+                        <div class="text-sm text-blue-200">
+                            {% if current_lang == 'ar' %}
+                                يوم ضمان
+                            {% else %}
+                                Days Warranty
+                            {% endif %}
+                        </div>
                     </div>
                     <div class="text-center">
-                        <div class="h4 fw-bold">Free</div>
-                        <small>Diagnosis</small>
+                        <div class="text-3xl font-bold text-white mb-2">
+                            {% if current_lang == 'ar' %}
+                                مجاني
+                            {% else %}
+                                Free
+                            {% endif %}
+                        </div>
+                        <div class="text-sm text-blue-200">
+                            {% if current_lang == 'ar' %}
+                                التشخيص
+                            {% else %}
+                                Diagnosis
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=400&fit=crop&crop=center" 
-                     class="img-fluid rounded-4 shadow-lg" alt="Device Repair">
+            
+            <!-- Right Image -->
+            <div class="relative">
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=400&fit=crop&crop=center" 
+                         class="w-full h-80 object-cover rounded-xl shadow-2xl" 
+                         alt="Device Repair">
+                </div>
             </div>
         </div>
     </div>
+    
+    <!-- Bottom Wave -->
+    <div class="absolute bottom-0 left-0 right-0">
+        <svg viewBox="0 0 1200 120" class="w-full h-12 fill-current text-white">
+            <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"></path>
+        </svg>
+    </div>
 </section>
 
-<!-- Repair Request Form -->
-<section class="py-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card shadow-lg border-0 rounded-4">
-                    <div class="card-header bg-white border-0 p-4">
-                        <h3 class="fw-bold mb-2">Request Repair Service</h3>
-                        <p class="text-muted mb-0">Fill out the form below and we'll get back to you with a free diagnosis and quote.</p>
+<!-- Services Section -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">
+                {% if current_lang == 'ar' %}
+                    خدمات الإصلاح المتخصصة
+                {% else %}
+                    Specialized Repair Services
+                {% endif %}
+            </h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                {% if current_lang == 'ar' %}
+                    نقدم خدمات إصلاح شاملة لجميع أنواع الأجهزة الإلكترونية بأعلى معايير الجودة
+                {% else %}
+                    We provide comprehensive repair services for all types of electronic devices with the highest quality standards
+                {% endif %}
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Screen Repairs -->
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-8 hover:shadow-xl transition-all hover-lift">
+                <div class="flex items-center mb-6">
+                    <div class="bg-red-100 rounded-full p-3 mr-4 rtl:mr-0 rtl:ml-4">
+                        <i class="fas fa-mobile-alt text-red-600 text-2xl"></i>
                     </div>
-                    <div class="card-body p-4">
-                        <form method="POST">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="device_type" class="form-label fw-medium">Device Type *</label>
-                                    <select class="form-select" id="device_type" name="device_type" required>
-                                        <option value="">Select device type</option>
-                                        <option value="smartphone">Smartphone</option>
-                                        <option value="tablet">Tablet</option>
-                                        <option value="laptop">Laptop</option>
-                                        <option value="smartwatch">Smartwatch</option>
-                                        <option value="headphones">Headphones</option>
-                                        <option value="gaming_console">Gaming Console</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="col-md-6">
-                                    <label for="brand" class="form-label fw-medium">Brand *</label>
-                                    <select class="form-select" id="brand" name="brand" required>
-                                        <option value="">Select brand</option>
-                                        <option value="apple">Apple</option>
-                                        <option value="samsung">Samsung</option>
-                                        <option value="google">Google</option>
-                                        <option value="oneplus">OnePlus</option>
-                                        <option value="dell">Dell</option>
-                                        <option value="hp">HP</option>
-                                        <option value="lenovo">Lenovo</option>
-                                        <option value="sony">Sony</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="col-12">
-                                    <label for="model" class="form-label fw-medium">Model *</label>
-                                    <input type="text" class="form-control" id="model" name="model" 
-                                           placeholder="e.g., iPhone 14 Pro, Galaxy S23, MacBook Pro 2023" required>
-                                </div>
-                                
-                                <div class="col-12">
-                                    <label for="issue_description" class="form-label fw-medium">Issue Description *</label>
-                                    <textarea class="form-control" id="issue_description" name="issue_description" rows="4" 
-                                              placeholder="Please describe the problem in detail..." required></textarea>
-                                </div>
-                                
-                                <div class="col-md-6">
-                                    <label for="customer_name" class="form-label fw-medium">Your Name *</label>
-                                    <input type="text" class="form-control" id="customer_name" name="customer_name" required>
-                                </div>
-                                
-                                <div class="col-md-6">
-                                    <label for="customer_email" class="form-label fw-medium">Email Address *</label>
-                                    <input type="email" class="form-control" id="customer_email" name="customer_email" required>
-                                </div>
-                                
-                                <div class="col-12">
-                                    <label for="customer_phone" class="form-label fw-medium">Phone Number *</label>
-                                    <input type="tel" class="form-control" id="customer_phone" name="customer_phone" 
-                                           placeholder="+1 (555) 123-4567" required>
-                                </div>
-                                
-                                <div class="col-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="agree_terms" required>
-                                        <label class="form-check-label" for="agree_terms">
-                                            I agree to the <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Privacy Policy</a>
-                                        </label>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary btn-lg w-100 fw-semibold">
-                                        <i class="fas fa-paper-plane me-2"></i>Submit Repair Request
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">
+                        {% if current_lang == 'ar' %}
+                            إصلاح الشاشات
+                        {% else %}
+                            Screen Repairs
+                        {% endif %}
+                    </h3>
                 </div>
+                <ul class="space-y-2 text-gray-600">
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2 rtl:mr-0 rtl:ml-2"></i>
+                        {% if current_lang == 'ar' %}
+                            استبدال الشاشة المكسورة
+                        {% else %}
+                            Cracked screen replacement
+                        {% endif %}
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2 rtl:mr-0 rtl:ml-2"></i>
+                        {% if current_lang == 'ar' %}
+                            مشاكل شاشة LCD/OLED
+                        {% else %}
+                            LCD/OLED display issues
+                        {% endif %}
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2 rtl:mr-0 rtl:ml-2"></i>
+                        {% if current_lang == 'ar' %}
+                            مشاكل حساسية اللمس
+                        {% else %}
+                            Touch sensitivity problems
+                        {% endif %}
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2 rtl:mr-0 rtl:ml-2"></i>
+                        {% if current_lang == 'ar' %}
+                            البكسل الميت أو الخطوط
+                        {% else %}
+                            Dead pixels or lines
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Hardware Repairs -->
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-8 hover:shadow-xl transition-all hover-lift">
+                <div class="flex items-center mb-6">
+                    <div class="bg-green-100 rounded-full p-3 mr-4 rtl:mr-0 rtl:ml-4">
+                        <i class="fas fa-microchip text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">
+                        {% if current_lang == 'ar' %}
+                            إصلاح الأجهزة
+                        {% else %}
+                            Hardware Repairs
+                        {% endif %}
+                    </h3>
+                </div>
+                <ul class="space-y-2 text-gray-600">
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2 rtl:mr-0 rtl:ml-2"></i>
+                        {% if current_lang == 'ar' %}
+                            مشاكل اللوحة الأم
+                        {% else %}
+                            Motherboard issues
+                        {% endif %}
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2 rtl:mr-0 rtl:ml-2"></i>
+                        {% if current_lang == 'ar' %}
+                            مشاكل الكاميرا
+                        {% else %}
+                            Camera problems
+                        {% endif %}
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2 rtl:mr-0 rtl:ml-2"></i>
+                        {% if current_lang == 'ar' %}
+                            مشاكل السماعة/الميكروفون
+                        {% else %}
+                            Speaker/microphone issues
+                        {% endif %}
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2 rtl:mr-0 rtl:ml-2"></i>
+                        {% if current_lang == 'ar' %}
+                            استرداد أضرار المياه
+                        {% else %}
+                            Water damage recovery
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Battery & Charging -->
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-8 hover:shadow-xl transition-all hover-lift">
+                <div class="flex items-center mb-6">
+                    <div class="bg-blue-100 rounded-full p-3 mr-4 rtl:mr-0 rtl:ml-4">
+                        <i class="fas fa-battery-half text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">
+                        {% if current_lang == 'ar' %}
+                            البطارية والشحن
+                        {% else %}
+                            Battery & Charging
+                        {% endif %}
+                    </h3>
+                </div>
+                <ul class="space-y-2 text-gray-600">
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2 rtl:mr-0 rtl:ml-2"></i>
+                        {% if current_lang == 'ar' %}
+                            استبدال البطارية
+                        {% else %}
+                            Battery replacement
+                        {% endif %}
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2 rtl:mr-0 rtl:ml-2"></i>
+                        {% if current_lang == 'ar' %}
+                            إصلاح منفذ الشحن
+                        {% else %}
+                            Charging port repair
+                        {% endif %}
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2 rtl:mr-0 rtl:ml-2"></i>
+                        {% if current_lang == 'ar' %}
+                            مشاكل الشحن السريع
+                        {% else %}
+                            Fast charging issues
+                        {% endif %}
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2 rtl:mr-0 rtl:ml-2"></i>
+                        {% if current_lang == 'ar' %}
+                            مشاكل الشحن اللاسلكي
+                        {% else %}
+                            Wireless charging problems
+                        {% endif %}
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Repair Process -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="display-6 fw-bold mb-3">Our Repair Process</h2>
-            <p class="lead text-muted">Simple, transparent, and reliable</p>
+<section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">
+                {% if current_lang == 'ar' %}
+                    عملية الإصلاح
+                {% else %}
+                    Our Repair Process
+                {% endif %}
+            </h2>
+            <p class="text-lg text-gray-600">
+                {% if current_lang == 'ar' %}
+                    بسيطة وشفافة وموثوقة
+                {% else %}
+                    Simple, transparent, and reliable
+                {% endif %}
+            </p>
         </div>
         
-        <div class="row g-4">
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="process-step">
-                    <div class="step-number bg-primary text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                        <span class="fw-bold">1</span>
-                    </div>
-                    <h5 class="fw-semibold mb-2">Submit Request</h5>
-                    <p class="text-muted small">Fill out our repair form with device details and issue description.</p>
-                </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="text-center">
+                <div class="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">1</div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                    {% if current_lang == 'ar' %}
+                        إرسال الطلب
+                    {% else %}
+                        Submit Request
+                    {% endif %}
+                </h3>
+                <p class="text-gray-600 text-sm">
+                    {% if current_lang == 'ar' %}
+                        املأ نموذج الإصلاح مع تفاصيل الجهاز ووصف المشكلة
+                    {% else %}
+                        Fill out our repair form with device details and issue description
+                    {% endif %}
+                </p>
             </div>
             
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="process-step">
-                    <div class="step-number bg-success text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                        <span class="fw-bold">2</span>
-                    </div>
-                    <h5 class="fw-semibold mb-2">Free Diagnosis</h5>
-                    <p class="text-muted small">Our technicians perform a comprehensive diagnostic assessment.</p>
-                </div>
+            <div class="text-center">
+                <div class="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">2</div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                    {% if current_lang == 'ar' %}
+                        التشخيص المجاني
+                    {% else %}
+                        Free Diagnosis
+                    {% endif %}
+                </h3>
+                <p class="text-gray-600 text-sm">
+                    {% if current_lang == 'ar' %}
+                        نقوم بفحص جهازك وتحديد المشكلة وتقديم عرض سعر مجاني
+                    {% else %}
+                        We examine your device, identify the issue, and provide a free quote
+                    {% endif %}
+                </p>
             </div>
             
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="process-step">
-                    <div class="step-number bg-info text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                        <span class="fw-bold">3</span>
-                    </div>
-                    <h5 class="fw-semibold mb-2">Approve Quote</h5>
-                    <p class="text-muted small">Review and approve the repair quote before we proceed.</p>
-                </div>
+            <div class="text-center">
+                <div class="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">3</div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                    {% if current_lang == 'ar' %}
+                        الإصلاح الاحترافي
+                    {% else %}
+                        Professional Repair
+                    {% endif %}
+                </h3>
+                <p class="text-gray-600 text-sm">
+                    {% if current_lang == 'ar' %}
+                        فنيينا المعتمدين يقومون بإصلاح جهازك باستخدام قطع غيار أصلية
+                    {% else %}
+                        Our certified technicians repair your device using genuine parts
+                    {% endif %}
+                </p>
             </div>
             
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="process-step">
-                    <div class="step-number bg-warning text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                        <span class="fw-bold">4</span>
-                    </div>
-                    <h5 class="fw-semibold mb-2">Device Ready</h5>
-                    <p class="text-muted small">Your device is repaired and ready for pickup or delivery.</p>
-                </div>
+            <div class="text-center">
+                <div class="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">4</div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                    {% if current_lang == 'ar' %}
+                        الاستلام والضمان
+                    {% else %}
+                        Pickup & Warranty
+                    {% endif %}
+                </h3>
+                <p class="text-gray-600 text-sm">
+                    {% if current_lang == 'ar' %}
+                        استلم جهازك مع ضمان 90 يوم على الإصلاح
+                    {% else %}
+                        Collect your device with 90-day repair warranty
+                    {% endif %}
+                </p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Common Issues -->
-<section class="py-5">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="display-6 fw-bold mb-3">Common Repair Services</h2>
-            <p class="lead text-muted">We fix all types of device issues</p>
+<!-- Repair Request Form -->
+<section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">
+                {% if current_lang == 'ar' %}
+                    طلب خدمة الإصلاح
+                {% else %}
+                    Request Repair Service
+                {% endif %}
+            </h2>
+            <p class="text-lg text-gray-600">
+                {% if current_lang == 'ar' %}
+                    املأ النموذج أدناه وسنتواصل معك لتقديم تشخيص وعرض سعر مجاني
+                {% else %}
+                    Fill out the form below and we'll get back to you with a free diagnosis and quote
+                {% endif %}
+            </p>
         </div>
         
-        <div class="row g-4">
-            <div class="col-lg-4 col-md-6">
-                <div class="service-item bg-white p-4 rounded-4 shadow-sm h-100">
-                    <div class="service-icon bg-danger bg-gradient rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                        <i class="fas fa-mobile-alt text-white"></i>
-                    </div>
-                    <h5 class="fw-semibold mb-3">Screen Repairs</h5>
-                    <ul class="list-unstyled text-muted small">
-                        <li class="mb-1">• Cracked screen replacement</li>
-                        <li class="mb-1">• LCD/OLED display issues</li>
-                        <li class="mb-1">• Touch sensitivity problems</li>
-                        <li class="mb-1">• Dead pixels or lines</li>
-                    </ul>
-                </div>
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 border-b border-gray-200">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">
+                    {% if current_lang == 'ar' %}
+                        معلومات الجهاز
+                    {% else %}
+                        Device Information
+                    {% endif %}
+                </h3>
+                <p class="text-gray-600">
+                    {% if current_lang == 'ar' %}
+                        أدخل تفاصيل جهازك والمشكلة التي تواجهها
+                    {% else %}
+                        Enter your device details and the issue you're experiencing
+                    {% endif %}
+                </p>
             </div>
             
-            <div class="col-lg-4 col-md-6">
-                <div class="service-item bg-white p-4 rounded-4 shadow-sm h-100">
-                    <div class="service-icon bg-primary bg-gradient rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                        <i class="fas fa-battery-half text-white"></i>
+            <form method="POST" class="p-8">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            {% if current_lang == 'ar' %}
+                                نوع الجهاز
+                            {% else %}
+                                Device Type
+                            {% endif %}
+                        </label>
+                        <select name="device_type" required 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                            <option value="">
+                                {% if current_lang == 'ar' %}
+                                    اختر نوع الجهاز
+                                {% else %}
+                                    Select device type
+                                {% endif %}
+                            </option>
+                            <option value="smartphone">
+                                {% if current_lang == 'ar' %}
+                                    هاتف ذكي
+                                {% else %}
+                                    Smartphone
+                                {% endif %}
+                            </option>
+                            <option value="tablet">
+                                {% if current_lang == 'ar' %}
+                                    جهاز لوحي
+                                {% else %}
+                                    Tablet
+                                {% endif %}
+                            </option>
+                            <option value="laptop">
+                                {% if current_lang == 'ar' %}
+                                    كمبيوتر محمول
+                                {% else %}
+                                    Laptop
+                                {% endif %}
+                            </option>
+                            <option value="console">
+                                {% if current_lang == 'ar' %}
+                                    كونسول ألعاب
+                                {% else %}
+                                    Gaming Console
+                                {% endif %}
+                            </option>
+                            <option value="other">
+                                {% if current_lang == 'ar' %}
+                                    أخرى
+                                {% else %}
+                                    Other
+                                {% endif %}
+                            </option>
+                        </select>
                     </div>
-                    <h5 class="fw-semibold mb-3">Battery Issues</h5>
-                    <ul class="list-unstyled text-muted small">
-                        <li class="mb-1">• Battery replacement</li>
-                        <li class="mb-1">• Charging port repair</li>
-                        <li class="mb-1">• Power button issues</li>
-                        <li class="mb-1">• Battery drain problems</li>
-                    </ul>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            {% if current_lang == 'ar' %}
+                                العلامة التجارية
+                            {% else %}
+                                Brand
+                            {% endif %}
+                        </label>
+                        <input type="text" name="brand" required 
+                               placeholder="{% if current_lang == 'ar' %}مثل: Apple، Samsung، Sony{% else %}e.g. Apple, Samsung, Sony{% endif %}"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            {% if current_lang == 'ar' %}
+                                الموديل
+                            {% else %}
+                                Model
+                            {% endif %}
+                        </label>
+                        <input type="text" name="model" required 
+                               placeholder="{% if current_lang == 'ar' %}مثل: iPhone 15، Galaxy S24{% else %}e.g. iPhone 15, Galaxy S24{% endif %}"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            {% if current_lang == 'ar' %}
+                                معلومات الاتصال
+                            {% else %}
+                                Contact Information
+                            {% endif %}
+                        </label>
+                        <input type="text" name="contact_info" required 
+                               placeholder="{% if current_lang == 'ar' %}رقم الهاتف أو البريد الإلكتروني{% else %}Phone number or email{% endif %}"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                    </div>
                 </div>
+                
+                <div class="mt-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        {% if current_lang == 'ar' %}
+                            وصف المشكلة
+                        {% else %}
+                            Issue Description
+                        {% endif %}
+                    </label>
+                    <textarea name="issue_description" required rows="4" 
+                              placeholder="{% if current_lang == 'ar' %}اوصف المشكلة بالتفصيل...{% else %}Describe the issue in detail...{% endif %}"
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none"></textarea>
+                </div>
+                
+                <div class="mt-8">
+                    <button type="submit" 
+                            class="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center">
+                        <i class="fas fa-paper-plane mr-2 rtl:mr-0 rtl:ml-2"></i>
+                        {% if current_lang == 'ar' %}
+                            إرسال طلب الإصلاح
+                        {% else %}
+                            Submit Repair Request
+                        {% endif %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="py-16 bg-gray-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold mb-4">
+                {% if current_lang == 'ar' %}
+                    تواصل معنا
+                {% else %}
+                    Get in Touch
+                {% endif %}
+            </h2>
+            <p class="text-xl text-gray-300">
+                {% if current_lang == 'ar' %}
+                    لديك أسئلة؟ فريقنا هنا لمساعدتك
+                {% else %}
+                    Have questions? Our team is here to help
+                {% endif %}
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="text-center">
+                <div class="bg-blue-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-phone text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">
+                    {% if current_lang == 'ar' %}
+                        اتصل بنا
+                    {% else %}
+                        Call Us
+                    {% endif %}
+                </h3>
+                <p class="text-gray-300">+1 (555) 123-4567</p>
             </div>
             
-            <div class="col-lg-4 col-md-6">
-                <div class="service-item bg-white p-4 rounded-4 shadow-sm h-100">
-                    <div class="service-icon bg-success bg-gradient rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                        <i class="fas fa-microchip text-white"></i>
-                    </div>
-                    <h5 class="fw-semibold mb-3">Hardware Repairs</h5>
-                    <ul class="list-unstyled text-muted small">
-                        <li class="mb-1">• Motherboard issues</li>
-                        <li class="mb-1">• Camera problems</li>
-                        <li class="mb-1">• Speaker/microphone issues</li>
-                        <li class="mb-1">• Water damage recovery</li>
-                    </ul>
+            <div class="text-center">
+                <div class="bg-blue-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-envelope text-2xl"></i>
                 </div>
+                <h3 class="text-lg font-semibold mb-2">
+                    {% if current_lang == 'ar' %}
+                        راسلنا
+                    {% else %}
+                        Email Us
+                    {% endif %}
+                </h3>
+                <p class="text-gray-300">repair@istore.deals</p>
+            </div>
+            
+            <div class="text-center">
+                <div class="bg-blue-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-map-marker-alt text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">
+                    {% if current_lang == 'ar' %}
+                        زورنا
+                    {% else %}
+                        Visit Us
+                    {% endif %}
+                </h3>
+                <p class="text-gray-300">
+                    {% if current_lang == 'ar' %}
+                        123 شارع التقنية، وادي السيليكون
+                    {% else %}
+                        123 Tech Street, Silicon Valley
+                    {% endif %}
+                </p>
             </div>
         </div>
     </div>
