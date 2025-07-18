@@ -35,6 +35,9 @@
         .bg-gradient-card {
             background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
         }
+        .bg-gradient-hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #7c3aed 100%);
+        }
         
         /* Smooth animations */
         .transition-all-300 {
@@ -56,6 +59,44 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Electronics animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { 
+                opacity: 0.1;
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.3;
+                transform: scale(1.05);
+            }
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        /* Arabic text improvements */
+        html[lang="ar"] .hero-title {
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        html[lang="en"] .hero-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
     </style>
     
